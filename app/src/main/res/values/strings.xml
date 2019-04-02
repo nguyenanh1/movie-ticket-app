@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">TicketMovie</string>
+    <string name="loading">Đang tải</string>
+    <string name="str_disconnect_try_again">Mất mạng, vui lòng kiểm tra lại!</string>
+    <string name="str_token_expried">Phiên đăng nhập hết hạn</string>
+    <string name="str_server_busy">Server bận</string>
+    <string name="str_no_internet_connect">Không có kết nối mạng</string>
+    <string name="cultureplex">Cultureplex</string>
+    <string name="dat_ve_theo_phim">Đặt vé theo phim</string>
+    <string name="dat_ve_theo_rap">Đặt bé theo rạp</string>
+    <string name="trang_chu">Trang chủ</string>
+    <string name="rap_cgv">Rạp CGV</string>
+    <string name="rap_dac_biet">Rạp đặc biệt</string>
+    <string name="dang_xuat">Đăng xuất</string>
+    <string name="dang_chieu">Đang chiếu</string>
+    <string name="dac_biet">Đặc biệt</string>
+    <string name="sap_chieu">Sắp chiếu</string>
+    <string name="dat_ve">Đặt vé</string>
+    <string name="tin_nong">Tin nóng</string>
+    <string name="tat_ca">TẤT CẢ</string>
+    <string name="login">Đăng nhập</string>
+    <string name="or">Hoặc</string>
+</resources>
