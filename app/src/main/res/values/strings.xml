@@ -20,4 +20,7 @@
     <string name="tat_ca">TẤT CẢ</string>
     <string name="login">Đăng nhập</string>
     <string name="or">Hoặc</string>
+    <string name="register_facebook">Đăng ký bằng tài khoản <b>Facebook</b></string>
+    <string name="foreget_password">Quên mật khẩu?</string>
+    <string name="register_account">Đăng ký tài khoản</string>
 </resources>

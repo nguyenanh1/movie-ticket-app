@@ -34,12 +34,9 @@ public class App extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         //Fabric.with(this, new Crashlytics());
-
         SharePrefUtils.instance().init(getBaseContext());
         DeviceUtils.instance().init(getBaseContext());
-
         getKeyhash();
-
         lifecycleAppListener = new LifecycleAppListener(getBaseContext());
         setupLifecycleListener();
     }
