@@ -39,4 +39,10 @@
     <color name="color_red_main">#A72B36</color>
     <color name="color_text">#bab9b7</color>
     <color name="color_bg">#dbd7cc</color>
+    <color name="color_text_title_register">#968c80</color>
+
+    <color name="color_c_red">#F51414</color>
+    <color name="color_c_organe">#FF9800</color>
+    <color name="color_c_yellow">#FFEB3B</color>
+    <color name="color_c_p">#4FC91A</color>
 </resources>

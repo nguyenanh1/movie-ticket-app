@@ -5,22 +5,29 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class CommonVls {
-    public static final String BASE_URL = "http://3.1.38.169:55891/";
-    public static final String BASE_URL_CDN = "http://103.56.158.146:8889/";
-
+    //    public static final String BASE_URL = "http://192.168.43.140:9085/";
+    public static final String BASE_URL = "http://192.168.1.8:9085/";
     //Lý do đến LoginActivity
     public static final String REASON_FOR_LOGIN = "reason for login";
 
-    public static final int RESPONE_500 = 500;
-    public static final int RESPONE_400 = 400;
-    public static final int RESPONE_499 = 499;
+    public static final int CODE_SUCCESS = 200;
 
-    public static final int RESPONE_SUCCESS = 200;
-    public static final int LOGIN_ON_OTHER_DEVICE = 409;
-    public static final int RESPONE_DENIED_ACCESS = 405;
-    public static final int NOT_FOUND = 404;
-    public static final int TOKEN_TIME_OUT = 406;
-    public static final int SESSION_TIME_OUT = 401;
+    public static final String TOKEN_TIME_OUT = "406";
+    public static final String SESSION_TIME_OUT = "401";
+
+    public static final String SUCCESS = "200";
+    public static final String SYSTEM_ERROR = "001";
+    public static final String ARGUMENT_NOT_VALID = "002";
+    public static final String USER_NOT_EXITS = "003";
+    public static final String PASSWORD_WRONG = "004";
+    public static final String LOGIN_OTHER_DEVICE = "005";
+    public static final String USER_REGISTER_EXITS = "006";
+    public static final String TOKEN_IN_VALID = "007";
+    public static final String TOKEN_IS_EMPTY = "008";
+    public static final String LIST_EMPTY = "009";
+    public static final String OBJECT_EMPTY = "010";
+
+
 
     public static String md5(String str) {
         String result = "";

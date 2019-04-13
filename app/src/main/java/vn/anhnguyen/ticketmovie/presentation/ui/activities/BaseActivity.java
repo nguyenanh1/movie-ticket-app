@@ -1,6 +1,7 @@
 package vn.anhnguyen.ticketmovie.presentation.ui.activities;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -9,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
@@ -17,18 +19,27 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import vn.anhnguyen.ticketmovie.R;
+import vn.anhnguyen.ticketmovie.presentation.ui.BaseView;
 import vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView;
 import vn.anhnguyen.ticketmovie.util.SharePrefUtils;
 import vn.anhnguyen.ticketmovie.util.common.CommonUtil;
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements BaseView {
     private CircleImageView mImageAvatar;
     private LinearLayout mLayoutTitleMain;
     private CustomTextView mTextTitle;
+    private ImageButton mButtonBack;
+    private ImageButton mButtonMenu;
+
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        hideKeyboard(this);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Đang xử lý, vui lòng đợi...");
+        progressDialog.setCancelable(false);
     }
 
     protected void hideNavigation() {
@@ -60,6 +71,20 @@ public abstract class BaseActivity extends AppCompatActivity {
         mImageAvatar = findViewById(R.id.image_avatar);
         mTextTitle = findViewById(R.id.text_name_activity);
         mLayoutTitleMain = findViewById(R.id.layout_title_main);
+        mButtonBack = findViewById(R.id.image_button_back);
+        mButtonMenu = findViewById(R.id.button_menu_navigation);
+    }
+
+    protected ImageButton getmButtonMenu() {
+        return mButtonMenu;
+    }
+
+    protected void showMenuNavigation(){
+        mButtonMenu.setVisibility(View.VISIBLE);
+    }
+
+    protected void hideMenuNavigation(){
+        mButtonMenu.setVisibility(View.GONE);
     }
 
     protected void setUpAvatar(){
@@ -84,6 +109,18 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     }
 
+    protected void showBack(){
+        mButtonBack.setVisibility(View.VISIBLE);
+    }
+
+    protected ImageButton getmButtonBack() {
+        return mButtonBack;
+    }
+
+    protected void hideButtonBack(){
+        mButtonBack.setVisibility(View.GONE);
+    }
+
     protected void hideAvatar(){
         mImageAvatar.setVisibility(View.GONE);
     }
@@ -101,6 +138,30 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         mTextTitle.setVisibility(View.VISIBLE);
         mTextTitle.setText(title);
+    }
+
+    @Override
+    public void showProgress() {
+        if(progressDialog!=null){
+            progressDialog.show();
+        }
+    }
+
+    @Override
+    public void hideProgress() {
+        if(progressDialog!=null){
+            progressDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void showError(String message) {
+
+    }
+
+    @Override
+    public void showWarning(String message) {
+
     }
 
     public void showToast(String message){
@@ -121,5 +182,30 @@ public abstract class BaseActivity extends AppCompatActivity {
             InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(activity.getWindow().getDecorView().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
+    }
+
+    @Override
+    public void showAlertDialog() {
+
+    }
+
+    @Override
+    public void gotoLogin() {
+
+    }
+
+    @Override
+    public void gotoLogin(String message) {
+
+    }
+
+    @Override
+    public void showSnackBarToast(String message) {
+
+    }
+
+    @Override
+    public void showNoInternetSnackBar(String message) {
+
     }
 }

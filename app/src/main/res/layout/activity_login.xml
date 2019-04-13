@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/color_bg"
     android:orientation="vertical"
+    android:id="@+id/layout_login"
     tools:context=".presentation.ui.activities.LoginActivity">
 
     <include layout="@layout/layout_toolbar" />
@@ -17,11 +18,12 @@
         android:orientation="vertical">
 
         <vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomEditText
+            android:id="@+id/edit_email_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="1dp"
             android:background="@color/color_white"
-            android:hint="Email hoặc tên đăng nhập"
+            android:hint="Email đăng nhâjp"
             android:paddingVertical="@dimen/dp_10"
             android:paddingStart="@dimen/dp_10"
             android:maxLines="1"
@@ -29,6 +31,7 @@
             android:textSize="@dimen/text_size_18sp" />
 
         <vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomEditText
+            android:id="@+id/edit_password_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/color_white"
@@ -41,6 +44,7 @@
             android:textSize="@dimen/text_size_18sp" />
     </LinearLayout>
     <vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomButton
+        android:id="@+id/button_login"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40"
         android:text="@string/login"
@@ -115,11 +119,10 @@
             android:gravity="center"
             android:layout_weight="1">
             <vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView
-                android:id="@+id/forr"
+                android:id="@+id/text_forget_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/foreget_password"
-                android:textStyle="bold"
                 android:textColor="@color/color_white"
                 android:textSize="@dimen/text_size_16sp"/>
         </LinearLayout>

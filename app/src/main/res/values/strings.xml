@@ -23,4 +23,22 @@
     <string name="register_facebook">Đăng ký bằng tài khoản <b>Facebook</b></string>
     <string name="foreget_password">Quên mật khẩu?</string>
     <string name="register_account">Đăng ký tài khoản</string>
+    <string name="tai_khoan_toi">TÀI KHOẢN TÔI...</string>
+    <string name="re_password">Nhập lại mật khẩu</string>
+    <string name="password">Mật khẩu</string>
+    <string name="info_other">THÔNG TIN THÊM</string>
+    <string name="name">Tên</string>
+    <string name="birthday">Ngày sinh</string>
+    <string name="last_name">Họ</string>
+    <string name="address">Địa chỉ</string>
+    <string name="dieu_khoan_su_dung"><u>Điều khoản sử dụng</u></string>
+    <string name="chinh_sach"><u>Chính sách bảo mật</u></string>
+    <string name="kiem_duyet">Kiểm duyệt</string>
+    <string name="khoi_chieu">Khởi chiếu</string>
+    <string name="the_loai">Thể loại</string>
+    <string name="duration">Thời lượng</string>
+    <string name="actor">Diễn viên</string>
+    <string name="director">Đạo diễn</string>
+    <string name="movie">Phim</string>
+    <string name="ap_youtube">AIzaSyAjEBUNQs03Zhy9dA-JpAL22E0MlRecnyw</string>
 </resources>

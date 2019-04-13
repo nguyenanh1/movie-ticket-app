@@ -3,6 +3,7 @@ package vn.anhnguyen.ticketmovie.util.common;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
@@ -10,6 +11,7 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -25,10 +27,14 @@ import android.widget.Toast;
 
 
 import java.lang.reflect.Field;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import vn.anhnguyen.ticketmovie.R;
+import vn.anhnguyen.ticketmovie.domain.interactors.base.Interactor;
+import vn.anhnguyen.ticketmovie.presentation.ui.activities.MainActivity;
 import vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView;
 
 public class CommonUtil {
@@ -272,5 +278,47 @@ public class CommonUtil {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public Integer covertDateToYYYYmmDD(Date date){
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        String dateS = format.format(date);
+        try{
+            int dateInt = Integer.parseInt(dateS);
+            return dateInt;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String convertToDDMMYY(int partdate){
+        int partday = partdate % 100;
+        int partdaym= partdate /100;
+        int dd = partday;
+        int parttmonth = partdaym % 100;
+        int mm = parttmonth;
+        int partyear = partdate/10000;
+        int yy = partyear;
+        return dd+" Th"+mm+" "+yy;
+    }
+
+    public void showAlertDialog(final Context context){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage("Bạn có muốn thoát khỏi?");
+        builder.setNegativeButton("HỦY BỎ", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setPositiveButton("ĐỒNG Ý", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Activity activity = (Activity) context;
+                activity.onBackPressed();
+            }
+        });
+        builder.create().show();
     }
 }
