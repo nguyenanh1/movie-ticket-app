@@ -41,4 +41,7 @@
     <string name="director">Đạo diễn</string>
     <string name="movie">Phim</string>
     <string name="ap_youtube">AIzaSyAjEBUNQs03Zhy9dA-JpAL22E0MlRecnyw</string>
+    <string name="change_password">Đổi mật khẩu</string>
+    <string name="infomation_account">Thông tin tài khoản</string>
+    <string name="history_transaction">Lịch sử giao dịch</string>
 </resources>

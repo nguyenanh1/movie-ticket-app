@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.widget.RelativeLayout;
 
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
@@ -24,8 +27,7 @@ import vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomButton;
 import vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView;
 import vn.anhnguyen.ticketmovie.util.common.CommonUtil;
 
-public class MovieDetailActivity extends BaseActivity implements IPresenterMovieDetail.IViewMovieDetail,
-        YouTubePlayer.OnInitializedListener {
+public class MovieDetailActivity extends BaseActivity implements IPresenterMovieDetail.IViewMovieDetail{
     @BindView(R.id.text_movie_name)
     CustomTextView mTextMovieName;
     @BindView(R.id.button_booking)
@@ -44,13 +46,14 @@ public class MovieDetailActivity extends BaseActivity implements IPresenterMovie
     CustomTextView mTextAcor;
     @BindView(R.id.text_duration)
     CustomTextView mTextDuration;
-    @BindView(R.id.youtube_player)
-    YouTubePlayerView mYoutube;
+    @BindView(R.id.web_view)
+    WebView mWebView;
+    @BindView(R.id.layout_youtube)
+    RelativeLayout mLayoutYoutbe;
+
     private IPresenterMovieDetail mPresenter;
 
     private static final String ID = "id";
-
-    private String link = "";
 
     public static Intent getIntetExtra(Context context,int id){
         Intent intent = new Intent(context,MovieDetailActivity.class);
@@ -69,30 +72,36 @@ public class MovieDetailActivity extends BaseActivity implements IPresenterMovie
         hideMenuNavigation();
         setTitle(CommonUtil.getStringFromRes(R.string.movie,this));
         initView();
+        int id = getIntent().getIntExtra(ID,-1);
+        mPresenter.getMovieDetail(id);
     }
 
     private void initView() {
         mPresenter = PresenterInjection.getInjection().newPresenterMovieDetail(this);
+        mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.setHapticFeedbackEnabled(false);
+        mWebView.setWebChromeClient(new WebChromeClient(){
+
+        });
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        int id = getIntent().getIntExtra(ID,-1);
-        mPresenter.getMovieDetail(id);
+
         getmButtonBack().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
-        mYoutube.initialize(CommonUtil.getStringFromRes(R.string.ap_youtube,this),this);
 
     }
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void showMovieDetail(MovieCategory movieCategory) {
+    public void showMovieDetail(final MovieCategory movieCategory) {
         if (movieCategory.getMovie().getName() != null) {
             mTextMovieName.setText(movieCategory.getMovie().getName());
         }
@@ -135,16 +144,17 @@ public class MovieDetailActivity extends BaseActivity implements IPresenterMovie
 
             mTextDuration.setText(hour + "Giờ " + minute + "Phút");
         }
-        this.link = movieCategory.getMovie().getTrailer();
-    }
-
-    @Override
-    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-        youTubePlayer.cueVideo(link);
-    }
-
-    @Override
-    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+        String link = "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/"
+                +movieCategory.getMovie().getTrailer()
+                +"\"></iframe>";
+        mWebView.loadData(link,"text/html","utf-8");
+        mLayoutYoutbe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = YouTubePlayerActivity.getIntentExtra(MovieDetailActivity.this,movieCategory.getMovie().getTrailer());
+                startActivity(i);
+            }
+        });
 
     }
 }

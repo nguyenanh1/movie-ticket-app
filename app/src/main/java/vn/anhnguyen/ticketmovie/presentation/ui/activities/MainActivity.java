@@ -118,13 +118,21 @@ public class MainActivity extends BaseActivity implements IPresenterMain.IViewMa
 
     @SuppressLint("SetTextI18n")
     private void setUpMovie(MovieCategory movie) {
-        mTextName.setText(movie.getMovie().getName());
+        if(movie.getMovie().getName().length()>35){
+            String name = movie.getMovie().getName().substring(0,35);
+            mTextName.setText(name+"...");
+        }else {
+            mTextName.setText(movie.getMovie().getName());
+        }
+
         if (movie.getMovie().getTime() != null) {
             int time = movie.getMovie().getTime();
             int hour = time / 60;
             int minute = time - hour * 60;
 
             mTextDuration.setText(hour + "Giờ " + minute + "Phút");
+        }else {
+            mTextDuration.setText("");
         }
         mTextTime.setText(CommonUtil.convertToDDMMYY(movie.getMovie().getPartTime()));
         if (movie.getMovie().getOld() != null) {

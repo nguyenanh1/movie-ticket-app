@@ -42,7 +42,6 @@ public class LoginActivity extends BaseActivity implements IPresenterLogin.IView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-
         initToolbar();
         hideAvatar();
         showBack();

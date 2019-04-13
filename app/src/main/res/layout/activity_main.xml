@@ -120,12 +120,12 @@
                                         android:layout_width="wrap_content"
                                         android:textColor="#625d57"
                                         tools:text="1 Giờ 21 phút"
+                                        android:layout_marginRight="@dimen/dp_5"
                                         android:layout_height="wrap_content" />
                                     <vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView
                                         android:id="@+id/text_time"
                                         android:layout_width="wrap_content"
                                         android:textColor="#625d57"
-                                        android:layout_marginLeft="@dimen/dp_5"
                                         tools:text="05 th4 2019"
                                         android:layout_height="wrap_content" />
                                 </LinearLayout>

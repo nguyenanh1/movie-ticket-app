@@ -31,6 +31,7 @@
                         android:gravity="center"
                         android:layout_centerInParent="true">
                         <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/image_avatar"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:src="@drawable/avatar_default_70px"/>
@@ -43,12 +44,14 @@
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_5">
                         <vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView
+                            android:id="@+id/text_account_type"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="MEMBER"/>
                     </LinearLayout>
                 </RelativeLayout>
                 <vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView
+                    android:id="@+id/text_displayname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="Ánh Nguyễn"
@@ -71,20 +74,208 @@
                         android:textColor="#FF3D98"
                         android:gravity="end" />
                     <vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView
+                        android:id="@+id/text_id_account"
                         android:layout_width="0dp"
                         android:layout_weight="6"
                         android:paddingLeft="@dimen/dp_20"
                         tools:text="122222233333333"
                         android:textColor="#303030"
-                        android:textSize="@dimen/text_size_16sp"
+                        android:textSize="@dimen/text_size_20sp"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:weightSum="2">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+
+                        <vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Tổng chi tiêu"
+                            android:textColor="@color/color_text_title_register"
+                            android:textSize="@dimen/text_size_14sp" />
+                        <vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView
+                            android:id="@+id/text_balance"
+                            tools:text="0 đ"
+                            android:layout_gravity="center"
+                            android:textSize="@dimen/text_size_20sp"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView
+                            android:text="Điểm thưởng"
+                            android:layout_gravity="center"
+                            android:textSize="@dimen/text_size_14sp"
+                            android:textColor="@color/color_text_title_register"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView
+                            android:id="@+id/text_point"
+                            tools:text="0"
+                            android:layout_gravity="center"
+                            android:textSize="@dimen/text_size_20sp"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
 
                 </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <RelativeLayout
+                        android:id="@+id/layout_infomation"
+                        android:padding="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/card"
+                            android:layout_marginLeft="@dimen/dp_5"
+                            android:src="@drawable/icon_card"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView
+                            android:layout_toRightOf="@+id/card"
+                            android:layout_marginLeft="@dimen/dp_10"
+                            android:textColor="@color/color_black"
+                            android:textSize="@dimen/text_size_16sp"
+                            android:layout_centerVertical="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/infomation_account"/>
+                        <ImageView
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="@dimen/dp_10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_arrow_left"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/layout_password"
+                        android:padding="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/lock"
+                            android:layout_marginLeft="@dimen/dp_5"
+                            android:src="@drawable/icon_lock"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView
+                            android:layout_toRightOf="@+id/lock"
+                            android:layout_marginLeft="@dimen/dp_10"
+                            android:textColor="@color/color_black"
+                            android:textSize="@dimen/text_size_16sp"
+                            android:layout_centerVertical="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/change_password"/>
+                        <ImageView
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="@dimen/dp_10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_arrow_left"/>
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:background="@color/color_white"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:id="@+id/layout_history_transaction"
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/text_size_16sp"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/history_transaction"/>
+                    <ImageView
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_arrow_left"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/layout_movie_saw"
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/text_size_16sp"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Phim đã xem"/>
+                    <ImageView
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_arrow_left"/>
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:background="@color/color_white"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:id="@+id/layout_logout"
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/text_size_16sp"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dang_xuat"/>
+                    <ImageView
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_arrow_left"/>
+                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

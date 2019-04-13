@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentation.ui.activities.MovieDetailActivity"></activity>
+        <activity android:name=".presentation.ui.activities.YouTubePlayerActivity"></activity>
+        <activity android:name=".presentation.ui.activities.MovieDetailActivity" />
         <activity android:name=".presentation.ui.activities.SignUpActivity" />
         <activity android:name=".presentation.ui.activities.SplashScreenActivity">
             <intent-filter>
