@@ -72,7 +72,6 @@ public class SignUpActivity extends BaseActivity implements IPresenterRegister.I
         showBack();
         hideAvatar();
         setTitle(CommonUtil.getStringFromRes(R.string.register_account,this));
-
         initView();
     }
 

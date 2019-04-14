@@ -11,9 +11,11 @@ import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.bumptech.glide.Glide;
 import com.tmall.ultraviewpager.UltraViewPager;
 import com.tmall.ultraviewpager.transformer.UltraDepthScaleTransformer;
 
@@ -21,6 +23,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 import vn.anhnguyen.ticketmovie.R;
 import vn.anhnguyen.ticketmovie.domain.model.response.MovieCategory;
 import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterMain;
@@ -28,6 +31,7 @@ import vn.anhnguyen.ticketmovie.presentation.presenter.impl.PresenterInjection;
 import vn.anhnguyen.ticketmovie.presentation.ui.adapter.MoviePagerAdapter;
 import vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomButton;
 import vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView;
+import vn.anhnguyen.ticketmovie.util.SharePrefUtils;
 import vn.anhnguyen.ticketmovie.util.common.CommonUtil;
 
 public class MainActivity extends BaseActivity implements IPresenterMain.IViewMain,
@@ -56,6 +60,28 @@ public class MainActivity extends BaseActivity implements IPresenterMain.IViewMa
     @BindView(R.id.button_booking)
     CustomButton mButtonBoooking;
 
+    //MenuNavigation
+    @BindView(R.id.layout_name)
+    LinearLayout mLayoutName;
+    @BindView(R.id.layout_info)
+    LinearLayout mLayoutInfo;
+    @BindView(R.id.layout_button_logout)
+    LinearLayout mLayoutLogout;
+    @BindView(R.id.text_login)
+    CustomTextView mTextLogin;
+    @BindView(R.id.image_avatar)
+    CircleImageView mImageAvatar;
+    @BindView(R.id.text_display_name)
+    CustomTextView mTextDisplayName;
+    @BindView(R.id.text_type)
+    CustomTextView mTextType;
+    @BindView(R.id.text_id)
+    CustomTextView mTextId;
+    @BindView(R.id.text_balance)
+    CustomTextView mTextBalance;
+    @BindView(R.id.text_point)
+    CustomTextView mTextPoint;
+
     private final static int START = 0;
     private final static int LIMIT = 10;
 
@@ -76,7 +102,46 @@ public class MainActivity extends BaseActivity implements IPresenterMain.IViewMa
         setUpAvatar();
         setUpHome();
         initView();
+        setUpNavigation();
         mRadioShowing.setChecked(true);
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void setUpNavigation() {
+        if(SharePrefUtils.instance().getLoginStatus()){
+            mTextLogin.setVisibility(View.GONE);
+            mLayoutLogout.setVisibility(View.VISIBLE);
+            mLayoutInfo.setVisibility(View.VISIBLE);
+            mLayoutName.setVisibility(View.VISIBLE);
+            if(!SharePrefUtils.instance().getAvatar().isEmpty()){
+                Glide.with(this).load(SharePrefUtils.instance().getAvatar()).centerCrop().into(mImageAvatar);
+            }
+            String displayName = SharePrefUtils.instance().getLastname()+" "+SharePrefUtils.instance().getName();
+            mTextDisplayName.setText(displayName);
+            mTextId.setText(String.valueOf(SharePrefUtils.instance().getUserId()));
+            switch (SharePrefUtils.instance().getAccountType()){
+                case 1:
+                    mTextType.setText("MEMBER");
+                    break;
+                case 2:
+                    mTextType.setText("VIP 1");
+                    break;
+                case 3:
+                    mTextType.setText("VIP 2");
+                    break;
+                default:
+                    mTextType.setText("MEMBER");
+                    break;
+            }
+            mTextBalance.setText(SharePrefUtils.instance().getBalance()+"đ");
+            mTextPoint.setText(SharePrefUtils.instance().getPoint()+"");
+
+        }else {
+            mTextLogin.setVisibility(View.VISIBLE);
+            mLayoutLogout.setVisibility(View.GONE);
+            mLayoutInfo.setVisibility(View.GONE);
+            mLayoutName.setVisibility(View.GONE);
+        }
     }
 
     private void initView() {

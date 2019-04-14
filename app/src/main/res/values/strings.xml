@@ -44,4 +44,7 @@
     <string name="change_password">Đổi mật khẩu</string>
     <string name="infomation_account">Thông tin tài khoản</string>
     <string name="history_transaction">Lịch sử giao dịch</string>
+    <string name="member">Thành viên CGV</string>
+    <string name="email_hint">Email đăng nhập</string>
+    <string name="password_login">Mật khẩu đăng nhập</string>
 </resources>

@@ -58,13 +58,29 @@ public class LoginInteractor extends AbstractInteractor implements ILoginInterac
                     if(response!=null){
                         switch (response.getCode()){
                             case CommonVls.SUCCESS:
+                                mSharedPrefUtils.setUserId(response.getData().getId());
+                                mSharedPrefUtils.setUserName(response.getData().getEmail());
+                                mSharedPrefUtils.setAvatar(response.getData().getAvatar());
+                                mSharedPrefUtils.setLastname(response.getData().getLastname());
+                                mSharedPrefUtils.setName(response.getData().getName());
+                                mSharedPrefUtils.setAccountType(response.getData().getType());
+                                mSharedPrefUtils.setBalance(response.getData().getBalace());
+                                mSharedPrefUtils.setPoint(response.getData().getPoint());
+                                mSharedPrefUtils.setLoginStatusToken(response.getData().getToken());
+                                mSharedPrefUtils.setLoginStatus(true);
                                 notifySuccess("Đăng nhập thành công!");
                                 break;
                             case CommonVls.ARGUMENT_NOT_VALID:
                                 notifyError("Bạn chưa nhập đầy đủ thông tin");
                                 break;
-                            case  CommonVls.USER_REGISTER_EXITS:
-                                notifyError("Email này đã được sử dụng");
+                            case  CommonVls.USER_NOT_EXITS:
+                                notifyError("Tài khoản này không tồn tại");
+                                break;
+                            case CommonVls.PASSWORD_WRONG:
+                                notifyError("Sai mật khẩu");
+                                break;
+                            case CommonVls.LOGIN_OTHER_DEVICE:
+                                notifyError("Tài khoản đang đăng nhập trên 1 thiết bị khác");
                                 break;
                             case  CommonVls.SYSTEM_ERROR:
                                 notifyError("Có lỗi từ hệ thống");

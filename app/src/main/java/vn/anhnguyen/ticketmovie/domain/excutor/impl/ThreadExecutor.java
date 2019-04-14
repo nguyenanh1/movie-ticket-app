@@ -20,8 +20,8 @@ public class ThreadExecutor implements Executor {
     // This is a singleton
     private static volatile ThreadExecutor sThreadExecutor;
 
-    private static final int CORE_POOL_SIZE = 4;
-    private static final int MAX_POOL_SIZE = 5;
+    private static final int CORE_POOL_SIZE = 8;
+    private static final int MAX_POOL_SIZE = 10;
     private static final int KEEP_ALIVE_TIME = 120;
     private static final TimeUnit TIME_UNIT = TimeUnit.SECONDS;
     private static final BlockingQueue<Runnable> WORK_QUEUE = new LinkedBlockingQueue<Runnable>();

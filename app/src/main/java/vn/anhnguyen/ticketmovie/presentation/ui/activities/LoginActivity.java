@@ -33,8 +33,12 @@ public class LoginActivity extends BaseActivity implements IPresenterLogin.IView
 
     private IPresenterLogin mPresenter;
 
-    public static Intent getIntent(Context context){
-        return new Intent(context,LoginActivity.class);
+    private final static String GO_TO_HOME = "home";
+
+    public static Intent getIntentExtra(Context context,boolean fromHome){
+        Intent i = new Intent(context,LoginActivity.class);
+        i.putExtra(GO_TO_HOME,fromHome);
+        return i;
     }
 
     @Override
@@ -85,5 +89,12 @@ public class LoginActivity extends BaseActivity implements IPresenterLogin.IView
     @Override
     public void loginSuccess(String message) {
         showToast(message);
+        boolean fromHome = getIntent().getBooleanExtra(GO_TO_HOME,false);
+        if(fromHome){
+            startActivity(ProfileActivity.getIntent(this));
+            finish();
+        }else {
+            finish();
+        }
     }
 }

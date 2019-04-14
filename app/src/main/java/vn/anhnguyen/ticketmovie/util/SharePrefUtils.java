@@ -21,7 +21,10 @@ public class SharePrefUtils implements ISharedPrefUtils {
     private final static String PREF_USER_ID = "user id";
     private final static String PREF_USER_NAME = "user-name";
     private final static String PREF_AVATAR = "avatar";
-    private final static String PREF_DISPLAY_NAME = "display-name";
+    private final static String PREF_NAME = "name";
+    private final static String PREF_LAST_NAME = "lase-name";
+    private final static String PREF_BALANCE = "balance";
+    private final static String PREF_TYPE = "type";
     private final static String PREF_POINT = "point";
 
     @SuppressLint("StaticFieldLeak")
@@ -37,21 +40,6 @@ public class SharePrefUtils implements ISharedPrefUtils {
 
     public void init(Context context) {
         this.mContext = context;
-    }
-
-    public void setNotifyCount(int notifyCount) {
-        if (mContext == null)
-            return;
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(AppConfig.NOTIFY_COUNT, notifyCount);
-        editor.apply();
-    }
-
-    public int getNotifyCount() {
-        if (mContext == null)
-            return 0;
-        return PreferenceManager.getDefaultSharedPreferences(mContext).getInt(AppConfig.NOTIFY_COUNT, 0);
     }
 
     //PREF_LOGIN_STATUS
@@ -86,17 +74,17 @@ public class SharePrefUtils implements ISharedPrefUtils {
 
     // UserId
     @Override
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(PREF_USER_ID, userId);
+        editor.putInt(PREF_USER_ID, userId);
         editor.apply();
     }
 
     @Override
-    public String getUserId() {
+    public int getUserId() {
         return PreferenceManager.getDefaultSharedPreferences(mContext)
-                .getString(PREF_USER_ID, null);
+                .getInt(PREF_USER_ID, 0);
     }
 
     // Username
@@ -129,33 +117,74 @@ public class SharePrefUtils implements ISharedPrefUtils {
                 .getString(PREF_AVATAR, "");
     }
 
-    // Display name
     @Override
-    public void setDisplayName(String displayName) {
+    public void setName(String Name) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(PREF_DISPLAY_NAME, displayName);
+        editor.putString(PREF_NAME, Name);
         editor.apply();
     }
 
     @Override
-    public String getDisplayName() {
+    public String getName() {
         return PreferenceManager.getDefaultSharedPreferences(mContext)
-                .getString(PREF_DISPLAY_NAME, "");
+                .getString(PREF_NAME, "");
     }
 
-    // Point
     @Override
-    public void setPoint(long point) {
+    public void setLastname(String lastname) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putLong(PREF_POINT, point);
+        editor.putString(PREF_LAST_NAME, lastname);
         editor.apply();
     }
 
     @Override
-    public long getPoint() {
+    public String getLastname() {
         return PreferenceManager.getDefaultSharedPreferences(mContext)
-                .getLong(PREF_POINT, 0);
+                .getString(PREF_LAST_NAME, "");
     }
+
+    @Override
+    public void setAccountType(int type) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(PREF_TYPE, type);
+        editor.apply();
+    }
+
+    @Override
+    public int getAccountType() {
+        return PreferenceManager.getDefaultSharedPreferences(mContext)
+                .getInt(PREF_TYPE, 0);
+    }
+
+    @Override
+    public void setBalance(int getBalance) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(PREF_BALANCE, getBalance);
+        editor.apply();
+    }
+
+    @Override
+    public int getBalance() {
+        return PreferenceManager.getDefaultSharedPreferences(mContext)
+                .getInt(PREF_BALANCE, 0);
+    }
+
+    @Override
+    public void setPoint(int point) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(PREF_POINT, point);
+        editor.apply();
+    }
+
+    @Override
+    public int getPoint() {
+        return PreferenceManager.getDefaultSharedPreferences(mContext)
+                .getInt(PREF_POINT, 0);
+    }
+
 }

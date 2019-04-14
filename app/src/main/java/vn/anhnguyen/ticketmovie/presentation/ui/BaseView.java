@@ -45,9 +45,9 @@ public interface BaseView {
 
     void showAlertDialog();
 
-    void gotoLogin();
+    void gotoLogin(boolean fromHome);
 
-    void gotoLogin(String message);
+    void gotoLogin(boolean fromHome,String message);
 
     void showSnackBarToast(String message);
 

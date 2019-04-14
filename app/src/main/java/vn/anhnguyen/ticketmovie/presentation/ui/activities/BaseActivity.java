@@ -102,7 +102,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                 if(SharePrefUtils.instance().getLoginStatus()){
                     startActivity(ProfileActivity.getIntent(context));
                 }else {
-                    goToLogin();
+                    gotoLogin(true);
                 }
             }
         });
@@ -173,10 +173,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         this.finish();
     }
 
-    public void goToLogin(){
-        startActivity(LoginActivity.getIntent(this));
-    }
-
     private void hideKeyboard(Activity activity) {
         if (activity != null && activity.getWindow() != null) {
             InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -190,13 +186,14 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
 
     @Override
-    public void gotoLogin() {
-
+    public void gotoLogin(boolean fromHome) {
+        startActivity(LoginActivity.getIntentExtra(this,fromHome));
     }
 
     @Override
-    public void gotoLogin(String message) {
-
+    public void gotoLogin(boolean fromHome,String message) {
+        showToast(message);
+        startActivity(LoginActivity.getIntentExtra(this,fromHome));
     }
 
     @Override

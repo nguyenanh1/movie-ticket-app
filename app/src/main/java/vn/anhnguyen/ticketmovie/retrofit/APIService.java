@@ -3,10 +3,13 @@ package vn.anhnguyen.ticketmovie.retrofit;
 import retrofit2.Call;
 import retrofit2.Response;
 import vn.anhnguyen.ticketmovie.config.CommonVls;
+import vn.anhnguyen.ticketmovie.domain.model.request.BodyChangePasswordRequest;
+import vn.anhnguyen.ticketmovie.domain.model.request.BodyChangeProfileRequest;
 import vn.anhnguyen.ticketmovie.domain.model.request.BodyLoginRequest;
 import vn.anhnguyen.ticketmovie.domain.model.request.BodyRegisterRequest;
 import vn.anhnguyen.ticketmovie.domain.model.response.BaseResponse;
 import vn.anhnguyen.ticketmovie.domain.model.response.LoginResponse;
+import vn.anhnguyen.ticketmovie.domain.model.response.ProfileResponse;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetDetailMovie;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetMovie;
 import vn.anhnguyen.ticketmovie.domain.service.IAPIService;
@@ -59,6 +62,94 @@ public class APIService implements IAPIService {
                 loginResonse.setCode(code);
                 loginResonse.setMesg(mesg);
                 return loginResonse;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public ProfileResponse getProfile(String token) {
+        API api = RetrofitInterface.getAPIService();
+        Call<ProfileResponse> call = api.getProfile(token);
+        try {
+            Response<ProfileResponse>  response = call.execute();
+            if(response.code()==CommonVls.CODE_SUCCESS){
+                return response.body();
+            }else {
+                String code = String.valueOf(response.code());
+                String mesg = response.message();
+                ProfileResponse profileResponse = new ProfileResponse();
+                profileResponse.setCode(code);
+                profileResponse.setMesg(mesg);
+                return profileResponse;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public BaseResponse changeProfile(String token, BodyChangeProfileRequest request) {
+        API api = RetrofitInterface.getAPIService();
+        Call<BaseResponse> call = api.changeProfile(token,request);
+        try {
+            Response<BaseResponse> response = call.execute();
+            if(response.code()==CommonVls.CODE_SUCCESS){
+                return response.body();
+            }else {
+                String code = String.valueOf(response.code());
+                String mesg = response.message();
+                BaseResponse baseResponse = new BaseResponse();
+                baseResponse.setCode(code);
+                baseResponse.setMesg(mesg);
+                return baseResponse;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public BaseResponse changePasswrod(String token, BodyChangePasswordRequest request) {
+        API api = RetrofitInterface.getAPIService();
+        Call<BaseResponse> call = api.changePassword(token,request);
+        try {
+            Response<BaseResponse> response = call.execute();
+            if(response.code()==CommonVls.CODE_SUCCESS){
+                return response.body();
+            }else {
+                String code = String.valueOf(response.code());
+                String mesg = response.message();
+                BaseResponse baseResponse = new BaseResponse();
+                baseResponse.setCode(code);
+                baseResponse.setMesg(mesg);
+                return baseResponse;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public BaseResponse logout(String token) {
+        API api = RetrofitInterface.getAPIService();
+        Call<BaseResponse> call = api.logout(token);
+        try {
+            Response<BaseResponse> response = call.execute();
+            if(response.code()==CommonVls.CODE_SUCCESS){
+                return response.body();
+            }else {
+                String code = String.valueOf(response.code());
+                String mesg = response.message();
+                BaseResponse baseResponse = new BaseResponse();
+                baseResponse.setCode(code);
+                baseResponse.setMesg(mesg);
+                return baseResponse;
             }
         }catch (Exception e){
             e.printStackTrace();

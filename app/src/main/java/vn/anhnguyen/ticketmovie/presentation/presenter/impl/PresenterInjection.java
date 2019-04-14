@@ -1,9 +1,12 @@
 package vn.anhnguyen.ticketmovie.presentation.presenter.impl;
 
 import vn.anhnguyen.ticketmovie.domain.excutor.impl.ThreadExecutor;
+import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterChangePassword;
+import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterInformation;
 import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterLogin;
 import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterMain;
 import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterMovieDetail;
+import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterProfile;
 import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterRegister;
 import vn.anhnguyen.ticketmovie.presentation.ui.MainThreadImpl;
 
@@ -31,5 +34,17 @@ public class PresenterInjection {
 
     public IPresenterMovieDetail newPresenterMovieDetail(IPresenterMovieDetail.IViewMovieDetail view){
         return new PresenterMovieDetail(ThreadExecutor.getInstance(),MainThreadImpl.getInstance(),view);
+    }
+
+    public IPresenterProfile newPresenterProfile(IPresenterProfile.IViewProfile view){
+        return new PresenterProfile(ThreadExecutor.getInstance(),MainThreadImpl.getInstance(),view);
+    }
+
+    public IPresenterInformation newPresenterInformation(IPresenterInformation.IViewInformation view){
+        return new PresenterInformation(ThreadExecutor.getInstance(),MainThreadImpl.getInstance(),view);
+    }
+
+    public IPresenterChangePassword newPresnterChangePassword(IPresenterChangePassword.IViewChangePassword view){
+        return new PresenterChangePassword(ThreadExecutor.getInstance(),MainThreadImpl.getInstance(),view);
     }
 }

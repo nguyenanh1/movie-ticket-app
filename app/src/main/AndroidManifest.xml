@@ -15,9 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentation.ui.activities.YouTubePlayerActivity"></activity>
-        <activity android:name=".presentation.ui.activities.MovieDetailActivity" />
-        <activity android:name=".presentation.ui.activities.SignUpActivity" />
+        <activity android:name=".presentation.ui.activities.ChangePasswordActivity"></activity>
         <activity android:name=".presentation.ui.activities.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,6 +37,30 @@
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
             android:name=".presentation.ui.activities.ProfileActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".presentation.ui.activities.InformationActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".presentation.ui.activities.YouTubePlayerActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".presentation.ui.activities.MovieDetailActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".presentation.ui.activities.SignUpActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label=""
             android:screenOrientation="portrait"

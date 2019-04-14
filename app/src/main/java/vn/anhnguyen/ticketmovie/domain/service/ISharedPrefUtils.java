@@ -13,19 +13,31 @@ public interface ISharedPrefUtils {
 
     String getUserName();
 
-    String getUserId();
+    int getUserId();
 
-    void setUserId(String userId);
+    void setUserId(int userId);
 
     void setAvatar(String avatar_url);
 
     String getAvatar();
 
-    void setDisplayName(String displayName);
+    void setName(String Name);
 
-    String getDisplayName();
+    String getName();
 
-    void setPoint(long point);
+    void setLastname(String lastname);
 
-    long getPoint();
+    String getLastname();
+
+    void setAccountType(int type);
+
+    int getAccountType();
+
+    void setBalance(int getBalance);
+
+    int getBalance();
+
+    void setPoint(int point);
+
+    int getPoint();
 }
