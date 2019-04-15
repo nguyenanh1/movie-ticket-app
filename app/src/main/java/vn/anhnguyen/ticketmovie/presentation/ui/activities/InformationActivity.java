@@ -171,6 +171,7 @@ public class InformationActivity extends BaseActivity implements IPresenterInfor
 
     @Override
     public void showChangProfileSuccess() {
+        setResult(RESULT_OK);
         finish();
     }
 }

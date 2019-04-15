@@ -102,8 +102,9 @@ public class MainActivity extends BaseActivity implements IPresenterMain.IViewMa
         setUpAvatar();
         setUpHome();
         initView();
-        setUpNavigation();
+
         mRadioShowing.setChecked(true);
+        mPresenter.getMovieIsShowing(START, LIMIT);
     }
 
     @SuppressLint("SetTextI18n")
@@ -118,6 +119,12 @@ public class MainActivity extends BaseActivity implements IPresenterMain.IViewMa
             }
             String displayName = SharePrefUtils.instance().getLastname()+" "+SharePrefUtils.instance().getName();
             mTextDisplayName.setText(displayName);
+            mTextDisplayName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mDrawerLayout.closeDrawer(Gravity.END);
+                }
+            });
             mTextId.setText(String.valueOf(SharePrefUtils.instance().getUserId()));
             switch (SharePrefUtils.instance().getAccountType()){
                 case 1:
@@ -135,12 +142,26 @@ public class MainActivity extends BaseActivity implements IPresenterMain.IViewMa
             }
             mTextBalance.setText(SharePrefUtils.instance().getBalance()+"đ");
             mTextPoint.setText(SharePrefUtils.instance().getPoint()+"");
+            mLayoutLogout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mDrawerLayout.closeDrawer(Gravity.END);
+                    mPresenter.logout();
+                }
+            });
 
         }else {
             mTextLogin.setVisibility(View.VISIBLE);
             mLayoutLogout.setVisibility(View.GONE);
             mLayoutInfo.setVisibility(View.GONE);
             mLayoutName.setVisibility(View.GONE);
+            mTextLogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mDrawerLayout.closeDrawer(Gravity.END);
+                    gotoLogin(false);
+                }
+            });
         }
     }
 
@@ -203,21 +224,25 @@ public class MainActivity extends BaseActivity implements IPresenterMain.IViewMa
         if (movie.getMovie().getOld() != null) {
             switch (movie.getMovie().getOld()) {
                 case 18:
+                    mTextOld.setVisibility(View.VISIBLE);
                     mTextOld.setText("C18");
                     mTextOld.setBackgroundDrawable(CommonUtil.getDrawableFromRes(R.drawable.drawable_c_red, MainActivity.this));
                     mTextOld.setTextColor(CommonUtil.getColorFromRes(R.color.color_c_red, MainActivity.this));
                     break;
                 case 16:
+                    mTextOld.setVisibility(View.VISIBLE);
                     mTextOld.setText("C16");
                     mTextOld.setBackgroundDrawable(CommonUtil.getDrawableFromRes(R.drawable.drawable_c_orangel, MainActivity.this));
                     mTextOld.setTextColor(CommonUtil.getColorFromRes(R.color.color_c_organe, MainActivity.this));
                     break;
                 case 13:
+                    mTextOld.setVisibility(View.VISIBLE);
                     mTextOld.setText("C13");
                     mTextOld.setBackgroundDrawable(CommonUtil.getDrawableFromRes(R.drawable.drawable_c_yellow, MainActivity.this));
                     mTextOld.setTextColor(CommonUtil.getColorFromRes(R.color.color_c_yellow, MainActivity.this));
                     break;
                 case 0:
+                    mTextOld.setVisibility(View.VISIBLE);
                     mTextOld.setText(" P ");
                     mTextOld.setBackgroundDrawable(CommonUtil.getDrawableFromRes(R.drawable.drawable_c_p, MainActivity.this));
                     mTextOld.setTextColor(CommonUtil.getColorFromRes(R.color.color_c_p, MainActivity.this));
@@ -237,7 +262,7 @@ public class MainActivity extends BaseActivity implements IPresenterMain.IViewMa
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.getMovieIsShowing(START, LIMIT);
+        setUpNavigation();
         mButtonBoooking.setVisibility(View.VISIBLE);
         getmButtonMenu().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -278,6 +303,12 @@ public class MainActivity extends BaseActivity implements IPresenterMain.IViewMa
     @Override
     public void showMovie(List<MovieCategory> movieCategori) {
         setUpPagerMovie(movieCategori);
+    }
+
+    @Override
+    public void showLogoutSuccess() {
+        setUpNavigation();
+        showToast("Đăng xuất thành công");
     }
 
     @Override

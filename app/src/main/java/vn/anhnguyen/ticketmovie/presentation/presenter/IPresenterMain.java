@@ -11,7 +11,9 @@ public interface IPresenterMain extends BasePresenter {
     void getTopMovie();
     void getMovieIsShowing(int start,int limit);
     void getMovieCommingSoon(int start,int limit);
+    void logout();
     interface IViewMain extends BaseView{
         void showMovie(List<MovieCategory> movieCategory);
+        void showLogoutSuccess();
     }
 }

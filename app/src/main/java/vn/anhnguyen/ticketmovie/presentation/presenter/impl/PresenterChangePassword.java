@@ -57,6 +57,7 @@ public class PresenterChangePassword extends AbstractPresenter implements IPrese
     @Override
     public void changePasswordSuccess(String message) {
         mView.hideProgress();
+        mView.showToast(message);
         mView.showChangePasswordSuccess();
     }
 

@@ -61,6 +61,8 @@ public class ChangPasswordInteractor extends AbstractInteractor implements IChan
                                 case CommonVls.ARGUMENT_NOT_VALID:
                                     notifyError("Bạn chưa nhập đầy đủ thông tin");
                                     break;
+                                case CommonVls.PASSWORD_WRONG:
+                                    notifyError("Mật khẩu hiện tại không chính xác");
                                 case CommonVls.LOGIN_OTHER_DEVICE:
                                     notifyLoginOtherDevice("Tài khoản của bạn đăng nhập ở 1 thiết bị khác");
                                     break;

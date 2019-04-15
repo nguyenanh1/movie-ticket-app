@@ -4,7 +4,9 @@ import vn.anhnguyen.ticketmovie.domain.excutor.Executor;
 import vn.anhnguyen.ticketmovie.domain.excutor.MainThread;
 import vn.anhnguyen.ticketmovie.domain.excutor.impl.ThreadExecutor;
 import vn.anhnguyen.ticketmovie.domain.interactors.IGetProfileInteractor;
+import vn.anhnguyen.ticketmovie.domain.interactors.ILogoutInteractor;
 import vn.anhnguyen.ticketmovie.domain.interactors.impl.GetProfileIneractor;
+import vn.anhnguyen.ticketmovie.domain.interactors.impl.LogoutInteractor;
 import vn.anhnguyen.ticketmovie.domain.model.response.User;
 import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterProfile;
 import vn.anhnguyen.ticketmovie.presentation.presenter.base.AbstractPresenter;
@@ -14,7 +16,7 @@ import vn.anhnguyen.ticketmovie.service.DeviceUtils;
 import vn.anhnguyen.ticketmovie.util.SharePrefUtils;
 
 public class PresenterProfile extends AbstractPresenter implements IPresenterProfile,
-        IGetProfileInteractor.Calllback {
+        IGetProfileInteractor.Calllback, ILogoutInteractor.Callback {
     private IPresenterProfile.IViewProfile mView;
 
     public PresenterProfile(Executor executor, MainThread mainThread, IViewProfile mView) {
@@ -26,6 +28,14 @@ public class PresenterProfile extends AbstractPresenter implements IPresenterPro
     public void getProfile() {
         mView.showProgress();
         IGetProfileInteractor interactor = new GetProfileIneractor(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(),this,
+                APIService.getInstance(), DeviceUtils.instance(), SharePrefUtils.instance());
+        interactor.execute();
+    }
+
+    @Override
+    public void logout() {
+        mView.showProgress();
+        ILogoutInteractor interactor = new LogoutInteractor(ThreadExecutor.getInstance(),MainThreadImpl.getInstance(),this,
                 APIService.getInstance(), DeviceUtils.instance(), SharePrefUtils.instance());
         interactor.execute();
     }
@@ -89,5 +99,11 @@ public class PresenterProfile extends AbstractPresenter implements IPresenterPro
     public void onFailMessage(String message) {
         mView.hideProgress();
         mView.showToast(message);
+    }
+
+    @Override
+    public void logoutSuccess() {
+        mView.hideProgress();
+        mView.showLogoutSuccess();
     }
 }

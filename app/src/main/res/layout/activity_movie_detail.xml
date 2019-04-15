@@ -103,6 +103,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/kiem_duyet"/>
                     <vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView
+                        android:padding="@dimen/dp_5"
                         android:id="@+id/text_old"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -130,6 +131,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="7"
+                        android:padding="@dimen/dp_5"
                         android:textSize="@dimen/text_size_14sp"
                         android:layout_marginLeft="@dimen/dp_10"
                         android:textColor="@color/color_text_title_register"/>
@@ -154,6 +156,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="7"
                         android:textSize="@dimen/text_size_14sp"
+                        android:padding="@dimen/dp_5"
                         android:layout_marginLeft="@dimen/dp_10"
                         android:textColor="@color/color_text_title_register"/>
                 </LinearLayout>
@@ -178,6 +181,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="7"
                         android:textSize="@dimen/text_size_14sp"
+                        android:padding="@dimen/dp_5"
                         android:layout_marginLeft="@dimen/dp_10"
                         android:textColor="@color/color_text_title_register"/>
                 </LinearLayout>
@@ -201,6 +205,7 @@
                         android:textSize="@dimen/text_size_14sp"
                         android:layout_height="wrap_content"
                         android:layout_weight="7"
+                        android:padding="@dimen/dp_5"
                         android:layout_marginLeft="@dimen/dp_10"
                         android:textColor="@color/color_text_title_register"/>
                 </LinearLayout>
@@ -223,6 +228,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="7"
+                        android:padding="@dimen/dp_5"
                         android:textSize="@dimen/text_size_14sp"
                         android:layout_marginLeft="@dimen/dp_10"
                         android:textColor="@color/color_text_title_register"/>

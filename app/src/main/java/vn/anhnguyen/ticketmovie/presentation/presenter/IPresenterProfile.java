@@ -6,8 +6,10 @@ import vn.anhnguyen.ticketmovie.presentation.ui.BaseView;
 
 public interface IPresenterProfile extends BasePresenter {
     void getProfile();
+    void logout();
 
     interface IViewProfile extends BaseView{
         void showProfile(User user);
+        void showLogoutSuccess();
     }
 }

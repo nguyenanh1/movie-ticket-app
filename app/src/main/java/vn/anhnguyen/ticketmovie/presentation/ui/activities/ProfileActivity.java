@@ -3,6 +3,7 @@ package vn.anhnguyen.ticketmovie.presentation.ui.activities;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -45,6 +46,8 @@ public class ProfileActivity extends BaseActivity implements IPresenterProfile.I
     @BindView(R.id.layout_logout)
     RelativeLayout mLayoutLogout;
 
+    private final static int UPDATE_PROFILE = 1;
+
     private IPresenterProfile mPresenter;
 
     private User user;
@@ -68,12 +71,13 @@ public class ProfileActivity extends BaseActivity implements IPresenterProfile.I
 
     private void initView() {
         mPresenter = PresenterInjection.getInjection().newPresenterProfile(this);
+        mPresenter.getProfile();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.resume();
+
         getmButtonBack().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +88,7 @@ public class ProfileActivity extends BaseActivity implements IPresenterProfile.I
             @Override
             public void onClick(View v) {
                 Intent i = InformationActivity.getIntent(ProfileActivity.this,user);
-                startActivity(i);
+                startActivityForResult(i,UPDATE_PROFILE);
             }
         });
         mLayoutPassword.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +113,7 @@ public class ProfileActivity extends BaseActivity implements IPresenterProfile.I
         mLayoutLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                mPresenter.logout();
             }
         });
     }
@@ -140,5 +144,18 @@ public class ProfileActivity extends BaseActivity implements IPresenterProfile.I
         mTextBalance.setText(user.getBalace()+"đ");
         mTextPoing.setText(String.valueOf(user.getPoint()));
         mTextId.setText(String.valueOf(user.getId()));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == UPDATE_PROFILE && resultCode == RESULT_OK){
+            mPresenter.getProfile();
+        }
+    }
+
+    @Override
+    public void showLogoutSuccess() {
+        finish();
     }
 }

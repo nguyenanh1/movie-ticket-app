@@ -8,9 +8,11 @@ import vn.anhnguyen.ticketmovie.domain.excutor.impl.ThreadExecutor;
 import vn.anhnguyen.ticketmovie.domain.interactors.IGetMovieCommingSoonInteractor;
 import vn.anhnguyen.ticketmovie.domain.interactors.IGetMovieIsShowingInteractor;
 import vn.anhnguyen.ticketmovie.domain.interactors.IGetMovieTopInteractor;
+import vn.anhnguyen.ticketmovie.domain.interactors.ILogoutInteractor;
 import vn.anhnguyen.ticketmovie.domain.interactors.impl.GetMovieCommingSoonInteractor;
 import vn.anhnguyen.ticketmovie.domain.interactors.impl.GetMovieIsShowingInteractor;
 import vn.anhnguyen.ticketmovie.domain.interactors.impl.GetMovieTopInteractor;
+import vn.anhnguyen.ticketmovie.domain.interactors.impl.LogoutInteractor;
 import vn.anhnguyen.ticketmovie.domain.model.response.MovieCategory;
 import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterMain;
 import vn.anhnguyen.ticketmovie.presentation.presenter.base.AbstractPresenter;
@@ -21,7 +23,7 @@ import vn.anhnguyen.ticketmovie.util.SharePrefUtils;
 
 public class PresenterMain extends AbstractPresenter implements IPresenterMain,
         IGetMovieTopInteractor.Callback, IGetMovieIsShowingInteractor.Callback ,
-        IGetMovieCommingSoonInteractor.Callback{
+        IGetMovieCommingSoonInteractor.Callback, ILogoutInteractor.Callback{
     IPresenterMain.IViewMain mView;
 
     public PresenterMain(Executor executor, MainThread mainThread, IViewMain mView) {
@@ -50,6 +52,13 @@ public class PresenterMain extends AbstractPresenter implements IPresenterMain,
         interactor.execute();
     }
 
+    @Override
+    public void logout() {
+        mView.showProgress();
+        ILogoutInteractor interactor = new LogoutInteractor(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(),this,
+                APIService.getInstance(), DeviceUtils.instance(), SharePrefUtils.instance());
+        interactor.execute();
+    }
 
 
     @Override
@@ -117,5 +126,9 @@ public class PresenterMain extends AbstractPresenter implements IPresenterMain,
     }
 
 
-
+    @Override
+    public void logoutSuccess() {
+        mView.hideProgress();
+        mView.showLogoutSuccess();
+    }
 }

@@ -90,10 +90,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     protected void setUpAvatar(){
         mImageAvatar.setVisibility(View.VISIBLE);
         String avatar = SharePrefUtils.instance().getAvatar();
-        if(avatar !=null && !avatar.isEmpty()){
-            Glide.with(this).load(avatar)
-                    .centerCrop()
-                    .into(mImageAvatar);
+        if(SharePrefUtils.instance().getLoginStatus()){
+            if(avatar !=null && !avatar.isEmpty()){
+                Glide.with(this).load(avatar)
+                        .centerCrop()
+                        .into(mImageAvatar);
+            }
         }
         final Context context = this;
         mImageAvatar.setOnClickListener(new View.OnClickListener() {
@@ -187,13 +189,14 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Override
     public void gotoLogin(boolean fromHome) {
+        SharePrefUtils.instance().setLoginStatus(false);
         startActivity(LoginActivity.getIntentExtra(this,fromHome));
     }
 
     @Override
     public void gotoLogin(boolean fromHome,String message) {
         showToast(message);
-        startActivity(LoginActivity.getIntentExtra(this,fromHome));
+        gotoLogin(fromHome);
     }
 
     @Override

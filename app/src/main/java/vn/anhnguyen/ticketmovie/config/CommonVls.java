@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class CommonVls {
     //    public static final String BASE_URL = "http://192.168.43.140:9085/";
-    public static final String BASE_URL = "http://192.168.1.8:9085/";
+    public static final String BASE_URL = "http://192.168.100.101:9085/";
     //Lý do đến LoginActivity
     public static final String REASON_FOR_LOGIN = "reason for login";
 
