@@ -6,8 +6,10 @@ import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterInformation;
 import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterLogin;
 import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterMain;
 import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterMovieDetail;
+import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterMovieTime;
 import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterProfile;
 import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterRegister;
+import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterTicket;
 import vn.anhnguyen.ticketmovie.presentation.ui.MainThreadImpl;
 
 public class PresenterInjection {
@@ -46,5 +48,13 @@ public class PresenterInjection {
 
     public IPresenterChangePassword newPresnterChangePassword(IPresenterChangePassword.IViewChangePassword view){
         return new PresenterChangePassword(ThreadExecutor.getInstance(),MainThreadImpl.getInstance(),view);
+    }
+
+    public IPresenterMovieTime newPresenterMovieTIme(IPresenterMovieTime.IViewMovieTime view){
+        return new PresenterMovieTIme(ThreadExecutor.getInstance(),MainThreadImpl.getInstance(),view);
+    }
+
+    public IPresenterTicket newPresenterTicket(IPresenterTicket.IViewTicket view){
+        return new PresenterTicket(ThreadExecutor.getInstance(),MainThreadImpl.getInstance(),view);
     }
 }

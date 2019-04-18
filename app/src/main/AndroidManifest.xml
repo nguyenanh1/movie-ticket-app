@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentation.ui.activities.ChangePasswordActivity"></activity>
+        <activity android:name=".presentation.ui.activities.TicketActivity"></activity>
+        <activity android:name=".presentation.ui.activities.MovieTimeActivity" />
+        <activity android:name=".presentation.ui.activities.ChangePasswordActivity" />
         <activity android:name=".presentation.ui.activities.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

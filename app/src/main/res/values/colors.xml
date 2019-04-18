@@ -45,4 +45,8 @@
     <color name="color_c_organe">#FF9800</color>
     <color name="color_c_yellow">#FFEB3B</color>
     <color name="color_c_p">#4FC91A</color>
+    <color name="color_seat_default">#B99E9E</color>
+    <color name="color_seat_vip">#E91E63</color>
+    <color name="color_seat_booked">#54DF3C</color>
+    <color name="color_seat_choose">#2196F3</color>
 </resources>

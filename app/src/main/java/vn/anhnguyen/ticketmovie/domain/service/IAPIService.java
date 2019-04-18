@@ -7,8 +7,11 @@ import vn.anhnguyen.ticketmovie.domain.model.request.BodyRegisterRequest;
 import vn.anhnguyen.ticketmovie.domain.model.response.BaseResponse;
 import vn.anhnguyen.ticketmovie.domain.model.response.LoginResponse;
 import vn.anhnguyen.ticketmovie.domain.model.response.ProfileResponse;
+import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetDetaiLMovieTime;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetDetailMovie;
+import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetInfoRoom;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetMovie;
+import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetMovieTime;
 
 public interface IAPIService {
     //Đăng ký
@@ -41,5 +44,12 @@ public interface IAPIService {
     //GET MOVIE DETAIL
     ResponseGetDetailMovie getMovieDetail(int id);
 
+    //GET TIME
+    ResponseGetMovieTime getMovieTime(String token,int idMovie,int date);
 
+    //GET MOVIE TIME DETAIL
+    ResponseGetDetaiLMovieTime getDetailMovieTime(String token,int idMovieTime);
+
+    //GET Room
+    ResponseGetInfoRoom getRoom(String token,int idRoom);
 }

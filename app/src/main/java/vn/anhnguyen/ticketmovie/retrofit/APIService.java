@@ -10,8 +10,11 @@ import vn.anhnguyen.ticketmovie.domain.model.request.BodyRegisterRequest;
 import vn.anhnguyen.ticketmovie.domain.model.response.BaseResponse;
 import vn.anhnguyen.ticketmovie.domain.model.response.LoginResponse;
 import vn.anhnguyen.ticketmovie.domain.model.response.ProfileResponse;
+import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetDetaiLMovieTime;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetDetailMovie;
+import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetInfoRoom;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetMovie;
+import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetMovieTime;
 import vn.anhnguyen.ticketmovie.domain.service.IAPIService;
 
 public class APIService implements IAPIService {
@@ -238,6 +241,72 @@ public class APIService implements IAPIService {
                 responseGetDetailMovie.setCode(code);
                 responseGetDetailMovie.setMesg(mesg);
                 return responseGetDetailMovie;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public ResponseGetMovieTime getMovieTime(String token,int idMovie, int date) {
+        API api = RetrofitInterface.getAPIService();
+        Call<ResponseGetMovieTime> call = api.getMovieTime(token,idMovie,date);
+        try {
+            Response<ResponseGetMovieTime>  response = call.execute();
+            if(response.code()==CommonVls.CODE_SUCCESS){
+                return response.body();
+            }else {
+                String code = String.valueOf(response.code());
+                String mesg = response.message();
+                ResponseGetMovieTime responseGetMovieTime = new ResponseGetMovieTime();
+                responseGetMovieTime.setCode(code);
+                responseGetMovieTime.setMesg(mesg);
+                return responseGetMovieTime;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public ResponseGetDetaiLMovieTime getDetailMovieTime(String token, int idMovieTime) {
+        API api = RetrofitInterface.getAPIService();
+        Call<ResponseGetDetaiLMovieTime> call = api.getTicket(token,idMovieTime);
+        try {
+            Response<ResponseGetDetaiLMovieTime>  response = call.execute();
+            if(response.code()==CommonVls.CODE_SUCCESS){
+                return response.body();
+            }else {
+                String code = String.valueOf(response.code());
+                String mesg = response.message();
+                ResponseGetDetaiLMovieTime responseGetDetaiLMovieTime = new ResponseGetDetaiLMovieTime();
+                responseGetDetaiLMovieTime.setCode(code);
+                responseGetDetaiLMovieTime.setMesg(mesg);
+                return responseGetDetaiLMovieTime;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public ResponseGetInfoRoom getRoom(String token, int idRoom) {
+        API api = RetrofitInterface.getAPIService();
+        Call<ResponseGetInfoRoom> call = api.getRoom(token,idRoom);
+        try {
+            Response<ResponseGetInfoRoom>  response = call.execute();
+            if(response.code()==CommonVls.CODE_SUCCESS){
+                return response.body();
+            }else {
+                String code = String.valueOf(response.code());
+                String mesg = response.message();
+                ResponseGetInfoRoom responseGetInfoRoom = new ResponseGetInfoRoom();
+                responseGetInfoRoom.setCode(code);
+                responseGetInfoRoom.setMesg(mesg);
+                return responseGetInfoRoom;
             }
         }catch (Exception e){
             e.printStackTrace();

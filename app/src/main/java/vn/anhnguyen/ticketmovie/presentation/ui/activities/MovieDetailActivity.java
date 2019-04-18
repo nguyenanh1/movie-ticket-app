@@ -21,6 +21,7 @@ import butterknife.ButterKnife;
 import vn.anhnguyen.ticketmovie.R;
 import vn.anhnguyen.ticketmovie.domain.model.response.Category;
 import vn.anhnguyen.ticketmovie.domain.model.response.MovieCategory;
+import vn.anhnguyen.ticketmovie.domain.model.response.MovieTime;
 import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterMovieDetail;
 import vn.anhnguyen.ticketmovie.presentation.presenter.impl.PresenterInjection;
 import vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomButton;
@@ -152,6 +153,14 @@ public class MovieDetailActivity extends BaseActivity implements IPresenterMovie
             @Override
             public void onClick(View v) {
                 Intent i = YouTubePlayerActivity.getIntentExtra(MovieDetailActivity.this,movieCategory.getMovie().getTrailer());
+                startActivity(i);
+            }
+        });
+
+        mButtonBooking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = MovieTimeActivity.getIntentExtra(MovieDetailActivity.this,movieCategory.getMovie().getId(),movieCategory.getMovie().getName());
                 startActivity(i);
             }
         });
