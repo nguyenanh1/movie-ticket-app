@@ -4,6 +4,8 @@ import vn.anhnguyen.ticketmovie.domain.model.request.BodyChangePasswordRequest;
 import vn.anhnguyen.ticketmovie.domain.model.request.BodyChangeProfileRequest;
 import vn.anhnguyen.ticketmovie.domain.model.request.BodyLoginRequest;
 import vn.anhnguyen.ticketmovie.domain.model.request.BodyRegisterRequest;
+import vn.anhnguyen.ticketmovie.domain.model.request.BodyTicketRequest;
+import vn.anhnguyen.ticketmovie.domain.model.request.BodyUnHolderTicket;
 import vn.anhnguyen.ticketmovie.domain.model.response.BaseResponse;
 import vn.anhnguyen.ticketmovie.domain.model.response.LoginResponse;
 import vn.anhnguyen.ticketmovie.domain.model.response.ProfileResponse;
@@ -12,6 +14,8 @@ import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetDetailMovie;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetInfoRoom;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetMovie;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetMovieTime;
+import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetTicketHolder;
+import vn.anhnguyen.ticketmovie.domain.model.response.ResposneGetTransaction;
 
 public interface IAPIService {
     //Đăng ký
@@ -52,4 +56,12 @@ public interface IAPIService {
 
     //GET Room
     ResponseGetInfoRoom getRoom(String token,int idRoom);
+
+    ResposneGetTransaction hold(String token, BodyTicketRequest request);
+
+    BaseResponse unhold(String token, BodyUnHolderTicket request);
+
+    BaseResponse booking(String token, BodyUnHolderTicket request);
+
+    ResponseGetTicketHolder getTicketHolder(String token,int idTrans);
 }

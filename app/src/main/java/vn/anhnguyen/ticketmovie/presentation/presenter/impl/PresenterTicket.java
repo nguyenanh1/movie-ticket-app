@@ -8,12 +8,15 @@ import vn.anhnguyen.ticketmovie.domain.excutor.impl.ThreadExecutor;
 import vn.anhnguyen.ticketmovie.domain.interactors.IGetDetailMovieInteractor;
 import vn.anhnguyen.ticketmovie.domain.interactors.IGetDetailMovieTimeInteractor;
 import vn.anhnguyen.ticketmovie.domain.interactors.IGetRoomInteractor;
+import vn.anhnguyen.ticketmovie.domain.interactors.IHoldTicketInteractor;
 import vn.anhnguyen.ticketmovie.domain.interactors.impl.GetDetailMovieInteractor;
 import vn.anhnguyen.ticketmovie.domain.interactors.impl.GetDetailMovieTimeInteractor;
 import vn.anhnguyen.ticketmovie.domain.interactors.impl.GetRoomInteractor;
+import vn.anhnguyen.ticketmovie.domain.interactors.impl.HoldTicketInteractor;
 import vn.anhnguyen.ticketmovie.domain.model.response.MovieCategory;
 import vn.anhnguyen.ticketmovie.domain.model.response.Room;
 import vn.anhnguyen.ticketmovie.domain.model.response.TicketDetail;
+import vn.anhnguyen.ticketmovie.domain.model.response.TransMovie;
 import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterTicket;
 import vn.anhnguyen.ticketmovie.presentation.presenter.base.AbstractPresenter;
 import vn.anhnguyen.ticketmovie.presentation.ui.MainThreadImpl;
@@ -23,7 +26,7 @@ import vn.anhnguyen.ticketmovie.util.SharePrefUtils;
 
 public class PresenterTicket extends AbstractPresenter implements IPresenterTicket,
         IGetDetailMovieTimeInteractor.Callback, IGetRoomInteractor.Callback,
-        IGetDetailMovieInteractor.Callback{
+        IGetDetailMovieInteractor.Callback , IHoldTicketInteractor.Callback {
     private IPresenterTicket.IViewTicket mView;
 
     public PresenterTicket(Executor executor, MainThread mainThread, IViewTicket mView) {
@@ -49,9 +52,17 @@ public class PresenterTicket extends AbstractPresenter implements IPresenterTick
 
     @Override
     public void getMovie(int idMovie) {
-        mView.hideProgress();
+        mView.showProgress();
         IGetDetailMovieInteractor interactor = new GetDetailMovieInteractor(ThreadExecutor.getInstance(),MainThreadImpl.getInstance(),this,
                 APIService.getInstance(),DeviceUtils.instance(),SharePrefUtils.instance(),idMovie);
+        interactor.execute();
+    }
+
+    @Override
+    public void hold(List<Integer> mListId) {
+        mView.showProgress();
+        IHoldTicketInteractor interactor = new HoldTicketInteractor(ThreadExecutor.getInstance(),MainThreadImpl.getInstance(),this,
+                APIService.getInstance(),DeviceUtils.instance(),SharePrefUtils.instance(),mListId);
         interactor.execute();
     }
 
@@ -78,6 +89,18 @@ public class PresenterTicket extends AbstractPresenter implements IPresenterTick
     @Override
     public void onError(String message) {
 
+    }
+
+    @Override
+    public void holdSucess(TransMovie transMovie) {
+        mView.hideProgress();
+        mView.holdSucess(transMovie);
+    }
+
+    @Override
+    public void holdFail(String message) {
+        mView.hideProgress();
+        mView.showToast(message);
     }
 
     @Override

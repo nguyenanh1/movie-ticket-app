@@ -7,6 +7,8 @@ import vn.anhnguyen.ticketmovie.domain.model.request.BodyChangePasswordRequest;
 import vn.anhnguyen.ticketmovie.domain.model.request.BodyChangeProfileRequest;
 import vn.anhnguyen.ticketmovie.domain.model.request.BodyLoginRequest;
 import vn.anhnguyen.ticketmovie.domain.model.request.BodyRegisterRequest;
+import vn.anhnguyen.ticketmovie.domain.model.request.BodyTicketRequest;
+import vn.anhnguyen.ticketmovie.domain.model.request.BodyUnHolderTicket;
 import vn.anhnguyen.ticketmovie.domain.model.response.BaseResponse;
 import vn.anhnguyen.ticketmovie.domain.model.response.LoginResponse;
 import vn.anhnguyen.ticketmovie.domain.model.response.ProfileResponse;
@@ -15,6 +17,8 @@ import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetDetailMovie;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetInfoRoom;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetMovie;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetMovieTime;
+import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetTicketHolder;
+import vn.anhnguyen.ticketmovie.domain.model.response.ResposneGetTransaction;
 import vn.anhnguyen.ticketmovie.domain.service.IAPIService;
 
 public class APIService implements IAPIService {
@@ -307,6 +311,94 @@ public class APIService implements IAPIService {
                 responseGetInfoRoom.setCode(code);
                 responseGetInfoRoom.setMesg(mesg);
                 return responseGetInfoRoom;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public ResposneGetTransaction hold(String token, BodyTicketRequest request) {
+        API api = RetrofitInterface.getAPIService();
+        Call<ResposneGetTransaction> call = api.hold(token,request);
+        try {
+            Response<ResposneGetTransaction>  response = call.execute();
+            if(response.code()==CommonVls.CODE_SUCCESS){
+                return response.body();
+            }else {
+                String code = String.valueOf(response.code());
+                String mesg = response.message();
+                ResposneGetTransaction resposneGetTransaction = new ResposneGetTransaction();
+                resposneGetTransaction.setCode(code);
+                resposneGetTransaction.setMesg(mesg);
+                return resposneGetTransaction;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public BaseResponse unhold(String token, BodyUnHolderTicket request) {
+        API api = RetrofitInterface.getAPIService();
+        Call<BaseResponse> call = api.unhold(token,request);
+        try {
+            Response<BaseResponse>  response = call.execute();
+            if(response.code()==CommonVls.CODE_SUCCESS){
+                return response.body();
+            }else {
+                String code = String.valueOf(response.code());
+                String mesg = response.message();
+                BaseResponse baseResponse = new BaseResponse();
+                baseResponse.setCode(code);
+                baseResponse.setMesg(mesg);
+                return baseResponse;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public BaseResponse booking(String token, BodyUnHolderTicket request) {
+        API api = RetrofitInterface.getAPIService();
+        Call<BaseResponse> call = api.booking(token,request);
+        try {
+            Response<BaseResponse>  response = call.execute();
+            if(response.code()==CommonVls.CODE_SUCCESS){
+                return response.body();
+            }else {
+                String code = String.valueOf(response.code());
+                String mesg = response.message();
+                BaseResponse baseResponse = new BaseResponse();
+                baseResponse.setCode(code);
+                baseResponse.setMesg(mesg);
+                return baseResponse;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public ResponseGetTicketHolder getTicketHolder(String token, int idTrans) {
+        API api = RetrofitInterface.getAPIService();
+        Call<ResponseGetTicketHolder> call = api.getTicketHolder(token,idTrans);
+        try {
+            Response<ResponseGetTicketHolder>  response = call.execute();
+            if(response.code()==CommonVls.CODE_SUCCESS){
+                return response.body();
+            }else {
+                String code = String.valueOf(response.code());
+                String mesg = response.message();
+                ResponseGetTicketHolder responseGetTicketHolder = new ResponseGetTicketHolder();
+                responseGetTicketHolder.setCode(code);
+                responseGetTicketHolder.setMesg(mesg);
+                return responseGetTicketHolder;
             }
         }catch (Exception e){
             e.printStackTrace();

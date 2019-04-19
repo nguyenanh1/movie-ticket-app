@@ -47,4 +47,6 @@
     <string name="member">Thành viên CGV</string>
     <string name="email_hint">Email đăng nhập</string>
     <string name="password_login">Mật khẩu đăng nhập</string>
+    <string name="pay">Thanh toán</string>
+    <string name="tong_so_ve">Tổng số vé</string>
 </resources>

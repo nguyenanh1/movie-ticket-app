@@ -48,7 +48,6 @@ public class MoviePagerAdapter extends PagerAdapter {
                 mClick.onClick(id);
             }
         });
-
         container.addView(view);
         return view;
     }

@@ -11,6 +11,8 @@ import vn.anhnguyen.ticketmovie.domain.model.request.BodyChangePasswordRequest;
 import vn.anhnguyen.ticketmovie.domain.model.request.BodyChangeProfileRequest;
 import vn.anhnguyen.ticketmovie.domain.model.request.BodyLoginRequest;
 import vn.anhnguyen.ticketmovie.domain.model.request.BodyRegisterRequest;
+import vn.anhnguyen.ticketmovie.domain.model.request.BodyTicketRequest;
+import vn.anhnguyen.ticketmovie.domain.model.request.BodyUnHolderTicket;
 import vn.anhnguyen.ticketmovie.domain.model.response.BaseResponse;
 import vn.anhnguyen.ticketmovie.domain.model.response.LoginResponse;
 import vn.anhnguyen.ticketmovie.domain.model.response.ProfileResponse;
@@ -19,6 +21,8 @@ import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetDetailMovie;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetInfoRoom;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetMovie;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetMovieTime;
+import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetTicketHolder;
+import vn.anhnguyen.ticketmovie.domain.model.response.ResposneGetTransaction;
 
 public interface API {
     //Đăng ký
@@ -74,7 +78,7 @@ public interface API {
                                             @Query("date") Integer date);
 
     //Lấy chi tiết lịch chiếu
-    @GET("/user/booking/getTicket")
+    @GET("/user/ticket/get")
     Call<ResponseGetDetaiLMovieTime> getTicket(@Header("token")String token,
                                                @Query("idMovieTime") Integer idMovieTime);
 
@@ -83,4 +87,19 @@ public interface API {
     Call<ResponseGetInfoRoom> getRoom(@Header("token")String token,
                                       @Query("idRoom")Integer idRoom);
 
+    @PUT("/user/ticket/hold")
+    Call<ResposneGetTransaction> hold(@Header("token")String token,
+                                      @Body BodyTicketRequest bodyTicket);
+
+    @PUT("/user/ticket/unhold")
+    Call<BaseResponse> unhold(@Header("token")String token,
+                            @Body BodyUnHolderTicket bodyTicket);
+
+    @PUT("/user/ticket/booking")
+    Call<BaseResponse> booking(@Header("token")String token,
+                           @Body BodyUnHolderTicket bodyTicket);
+
+    @GET("/user/ticket/getTicketBook")
+    Call<ResponseGetTicketHolder> getTicketHolder(@Header("token")String token,
+                                                  @Query("idTrans") int idTrans);
 }

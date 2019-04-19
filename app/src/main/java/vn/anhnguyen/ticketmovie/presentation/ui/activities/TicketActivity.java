@@ -21,10 +21,12 @@ import vn.anhnguyen.ticketmovie.domain.model.response.MovieTime;
 import vn.anhnguyen.ticketmovie.domain.model.response.Room;
 import vn.anhnguyen.ticketmovie.domain.model.response.Ticket;
 import vn.anhnguyen.ticketmovie.domain.model.response.TicketDetail;
+import vn.anhnguyen.ticketmovie.domain.model.response.TransMovie;
 import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterTicket;
 import vn.anhnguyen.ticketmovie.presentation.presenter.impl.PresenterInjection;
 import vn.anhnguyen.ticketmovie.presentation.presenter.impl.PresenterTicket;
 import vn.anhnguyen.ticketmovie.presentation.ui.adapter.AdapterSeat;
+import vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomButton;
 import vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView;
 import vn.anhnguyen.ticketmovie.util.common.CommonUtil;
 
@@ -40,6 +42,8 @@ public class TicketActivity extends BaseActivity implements IPresenterTicket.IVi
     CustomTextView mTextNameMovie;
     @BindView(R.id.text_old)
     CustomTextView mTextOld;
+    @BindView(R.id.button_booking)
+    CustomButton mButtonBook;
 
     private final static String DATA = "data";
     private final static String MOVIE_TIME = "movie_time";
@@ -96,7 +100,19 @@ public class TicketActivity extends BaseActivity implements IPresenterTicket.IVi
         });
         mPresenter.getRooom(movieTime.getIdRoom());
         mPresenter.getMovie(movieTime.getIdMovie());
+        mButtonBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<Integer> mListId = new ArrayList<>();
+                for(TicketDetail temp: mListBook){
+                    mListId.add(temp.getTicket().getIdTicket());
+                }
+                mPresenter.hold(mListId);
+            }
+        });
     }
+
+
 
     private void getData() {
         Bundle bundle = getIntent().getBundleExtra(DATA);
@@ -158,6 +174,18 @@ public class TicketActivity extends BaseActivity implements IPresenterTicket.IVi
 
             }
         }
+    }
+
+    @Override
+    public void holdSucess(TransMovie transMovie) {
+        Intent i = PayActivity.getIntent(this,transMovie,movieTime);
+        startActivity(i);
+    }
+
+    @Override
+    public void holdFail() {
+        mPresenter.getRooom(movieTime.getIdRoom());
+        mPresenter.getMovie(movieTime.getIdMovie());
     }
 
     @Override

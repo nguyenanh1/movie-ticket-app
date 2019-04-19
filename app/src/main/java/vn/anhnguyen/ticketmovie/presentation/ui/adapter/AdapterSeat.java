@@ -37,6 +37,7 @@ public class AdapterSeat extends RecyclerView.Adapter<AdapterSeat.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         TicketDetail ticketDetail = mList.get(i);
         viewHolder.bindData(ticketDetail);
+        viewHolder.setIsRecyclable(false);-
     }
 
     @Override
@@ -63,11 +64,14 @@ public class AdapterSeat extends RecyclerView.Adapter<AdapterSeat.ViewHolder> {
         public void bindData(final TicketDetail ticketDetail){
 
             if(ticketDetail.getPosition().getType()==1){
-                if(ticketDetail.getTicket().getStatus()==1){
+                 if(ticketDetail.getTicket().getStatus()==1){
                     mLayoutSeat.setBackgroundColor(CommonUtil.getColorFromRes(R.color.color_seat_default,context));
                 }else if(ticketDetail.getTicket().getStatus()==2){
                     mLayoutSeat.setBackgroundColor(CommonUtil.getColorFromRes(R.color.color_seat_booked,context));
                     mLayoutSeat.setEnabled(false);
+                }else if(ticketDetail.getTicket().getStatus()==3){
+                    mLayoutSeat.setEnabled(false);
+                    mLayoutSeat.setBackgroundColor(CommonUtil.getColorFromRes(R.color.color_seat_choose,context));
                 }else {
                     mLayoutSeat.setBackgroundColor(CommonUtil.getColorFromRes(R.color.color_seat_choose,context));
                 }
@@ -78,6 +82,9 @@ public class AdapterSeat extends RecyclerView.Adapter<AdapterSeat.ViewHolder> {
                 }else if(ticketDetail.getTicket().getStatus()==2){
                     mLayoutSeat.setBackgroundColor(CommonUtil.getColorFromRes(R.color.color_seat_booked,context));
                     mLayoutSeat.setEnabled(false);
+                }if(ticketDetail.getTicket().getStatus()==3){
+                    mLayoutSeat.setEnabled(false);
+                    mLayoutSeat.setBackgroundColor(CommonUtil.getColorFromRes(R.color.color_seat_choose,context));
                 }else {
                     mLayoutSeat.setBackgroundColor(CommonUtil.getColorFromRes(R.color.color_seat_choose,context));
                 }

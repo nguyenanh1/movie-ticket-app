@@ -105,6 +105,7 @@
                     android:id="@+id/recycler_seat"
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
+                    android:overScrollMode="never"
                     android:layout_height="wrap_content">
                 </android.support.v7.widget.RecyclerView>
             </LinearLayout>

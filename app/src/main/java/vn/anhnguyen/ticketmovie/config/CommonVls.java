@@ -3,6 +3,7 @@ package vn.anhnguyen.ticketmovie.config;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.PublicKey;
 
 public class CommonVls {
     //    public static final String BASE_URL = "http://192.168.43.140:9085/";
@@ -26,6 +27,7 @@ public class CommonVls {
     public static final String TOKEN_IS_EMPTY = "008";
     public static final String LIST_EMPTY = "009";
     public static final String OBJECT_EMPTY = "010";
+    public static final String TICKET_IS_HOLDING = "011";
 
 
 

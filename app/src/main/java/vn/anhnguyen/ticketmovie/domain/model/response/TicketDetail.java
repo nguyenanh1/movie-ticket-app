@@ -3,7 +3,9 @@ package vn.anhnguyen.ticketmovie.domain.model.response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class TicketDetail {
+import java.io.Serializable;
+
+public class TicketDetail implements Serializable {
     @SerializedName("ticket")
     @Expose
     private Ticket ticket;
