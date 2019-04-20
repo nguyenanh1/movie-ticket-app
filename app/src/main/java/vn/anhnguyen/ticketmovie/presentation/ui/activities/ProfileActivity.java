@@ -11,6 +11,8 @@ import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 
+import java.text.DecimalFormat;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -101,7 +103,8 @@ public class ProfileActivity extends BaseActivity implements IPresenterProfile.I
         mLayoutHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i = HistoryTransactionActivity.getIntent(ProfileActivity.this);
+                startActivity(i);
             }
         });
         mLayoutMovieSaw.setOnClickListener(new View.OnClickListener() {
@@ -141,7 +144,8 @@ public class ProfileActivity extends BaseActivity implements IPresenterProfile.I
         }
         String displayName = user.getLastname()+" "+user.getName();
         mTextDisplayName.setText(displayName);
-        mTextBalance.setText(user.getBalace()+"đ");
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        mTextBalance.setText(decimalFormat.format(user.getBalace())+"đ");
         mTextPoing.setText(String.valueOf(user.getPoint()));
         mTextId.setText(String.valueOf(user.getId()));
     }

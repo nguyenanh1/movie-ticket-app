@@ -37,7 +37,7 @@ public class AdapterSeat extends RecyclerView.Adapter<AdapterSeat.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         TicketDetail ticketDetail = mList.get(i);
         viewHolder.bindData(ticketDetail);
-        viewHolder.setIsRecyclable(false);-
+        viewHolder.setIsRecyclable(false);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class AdapterSeat extends RecyclerView.Adapter<AdapterSeat.ViewHolder> {
                 }else if(ticketDetail.getTicket().getStatus()==2){
                     mLayoutSeat.setBackgroundColor(CommonUtil.getColorFromRes(R.color.color_seat_booked,context));
                     mLayoutSeat.setEnabled(false);
-                }if(ticketDetail.getTicket().getStatus()==3){
+                }else if(ticketDetail.getTicket().getStatus()==3){
                     mLayoutSeat.setEnabled(false);
                     mLayoutSeat.setBackgroundColor(CommonUtil.getColorFromRes(R.color.color_seat_choose,context));
                 }else {
@@ -91,7 +91,7 @@ public class AdapterSeat extends RecyclerView.Adapter<AdapterSeat.ViewHolder> {
             }
             int col = ticketDetail.getPosition().getCol();
             int row = ticketDetail.getPosition().getRow();
-            String position = col+"-"+row;
+            String position = row+"-"+col;
             mTextPosition.setText(position);
             mLayoutSeat.setOnClickListener(new View.OnClickListener() {
                 @Override

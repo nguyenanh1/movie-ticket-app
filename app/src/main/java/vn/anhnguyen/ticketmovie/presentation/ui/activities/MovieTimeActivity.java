@@ -76,7 +76,7 @@ public class MovieTimeActivity extends BaseActivity implements IPresenterMovieTi
 
     private void setUpRecycletTime() {
         mList = new ArrayList<>();
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,3,GridLayoutManager.HORIZONTAL   ,false);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,3,GridLayoutManager.VERTICAL   ,false);
         mRecyclerTime.setLayoutManager(mLayoutManager);
         mAdapter = new AdapterMovieTime(mList,this);
         mRecyclerTime.setAdapter(mAdapter);
@@ -111,7 +111,28 @@ public class MovieTimeActivity extends BaseActivity implements IPresenterMovieTi
         SimpleDateFormat formatInt = new SimpleDateFormat("yyyyMMdd");
         try{
             dateM = Integer.parseInt(formatInt.format(date));
-            mPresenter.getMovieTime(id,dateM);
+            if(!SharePrefUtils.instance().getLoginStatus()){
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Bạn vui lòng đăng nhập để lấy thông tin lịch chiếu");
+                builder.setPositiveButton("Đăng nhập", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        gotoLogin(false);
+                    }
+                });
+                builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        onBackPressed();
+                    }
+                });
+                builder.setCancelable(false);
+                builder.create().show();
+            }else {
+                mPresenter.getMovieTime(id,dateM);
+            }
         }catch (Exception e){
             e.printStackTrace();
         }

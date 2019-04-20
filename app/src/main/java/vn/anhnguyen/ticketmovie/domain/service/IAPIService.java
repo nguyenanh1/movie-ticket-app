@@ -12,10 +12,11 @@ import vn.anhnguyen.ticketmovie.domain.model.response.ProfileResponse;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetDetaiLMovieTime;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetDetailMovie;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetInfoRoom;
+import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetListTran;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetMovie;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetMovieTime;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetTicketHolder;
-import vn.anhnguyen.ticketmovie.domain.model.response.ResposneGetTransaction;
+import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetTransaction;
 
 public interface IAPIService {
     //Đăng ký
@@ -57,11 +58,13 @@ public interface IAPIService {
     //GET Room
     ResponseGetInfoRoom getRoom(String token,int idRoom);
 
-    ResposneGetTransaction hold(String token, BodyTicketRequest request);
+    ResponseGetTransaction hold(String token, BodyTicketRequest request);
 
     BaseResponse unhold(String token, BodyUnHolderTicket request);
 
     BaseResponse booking(String token, BodyUnHolderTicket request);
 
     ResponseGetTicketHolder getTicketHolder(String token,int idTrans);
+
+    ResponseGetListTran getTransaction(String token);
 }

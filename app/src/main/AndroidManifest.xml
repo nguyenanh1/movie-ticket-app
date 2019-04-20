@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentation.ui.activities.PayActivity"></activity>
+        <activity android:name=".presentation.ui.activities.HistoryTransactionActivity"></activity>
+        <activity android:name=".presentation.ui.activities.PayActivity" />
         <activity android:name=".presentation.ui.activities.TicketActivity" />
         <activity android:name=".presentation.ui.activities.MovieTimeActivity" />
         <activity android:name=".presentation.ui.activities.ChangePasswordActivity" />

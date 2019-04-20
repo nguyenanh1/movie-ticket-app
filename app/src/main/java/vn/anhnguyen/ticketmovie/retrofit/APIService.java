@@ -15,10 +15,11 @@ import vn.anhnguyen.ticketmovie.domain.model.response.ProfileResponse;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetDetaiLMovieTime;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetDetailMovie;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetInfoRoom;
+import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetListTran;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetMovie;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetMovieTime;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetTicketHolder;
-import vn.anhnguyen.ticketmovie.domain.model.response.ResposneGetTransaction;
+import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetTransaction;
 import vn.anhnguyen.ticketmovie.domain.service.IAPIService;
 
 public class APIService implements IAPIService {
@@ -319,17 +320,17 @@ public class APIService implements IAPIService {
     }
 
     @Override
-    public ResposneGetTransaction hold(String token, BodyTicketRequest request) {
+    public ResponseGetTransaction hold(String token, BodyTicketRequest request) {
         API api = RetrofitInterface.getAPIService();
-        Call<ResposneGetTransaction> call = api.hold(token,request);
+        Call<ResponseGetTransaction> call = api.hold(token,request);
         try {
-            Response<ResposneGetTransaction>  response = call.execute();
+            Response<ResponseGetTransaction>  response = call.execute();
             if(response.code()==CommonVls.CODE_SUCCESS){
                 return response.body();
             }else {
                 String code = String.valueOf(response.code());
                 String mesg = response.message();
-                ResposneGetTransaction resposneGetTransaction = new ResposneGetTransaction();
+                ResponseGetTransaction resposneGetTransaction = new ResponseGetTransaction();
                 resposneGetTransaction.setCode(code);
                 resposneGetTransaction.setMesg(mesg);
                 return resposneGetTransaction;
@@ -399,6 +400,28 @@ public class APIService implements IAPIService {
                 responseGetTicketHolder.setCode(code);
                 responseGetTicketHolder.setMesg(mesg);
                 return responseGetTicketHolder;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public ResponseGetListTran getTransaction(String token) {
+        API api = RetrofitInterface.getAPIService();
+        Call<ResponseGetListTran> call = api.getTransaction(token);
+        try {
+            Response<ResponseGetListTran>  response = call.execute();
+            if(response.code()==CommonVls.CODE_SUCCESS){
+                return response.body();
+            }else {
+                String code = String.valueOf(response.code());
+                String mesg = response.message();
+                ResponseGetListTran responseGetTransaction = new ResponseGetListTran();
+                responseGetTransaction.setCode(code);
+                responseGetTransaction.setMesg(mesg);
+                return responseGetTransaction;
             }
         }catch (Exception e){
             e.printStackTrace();

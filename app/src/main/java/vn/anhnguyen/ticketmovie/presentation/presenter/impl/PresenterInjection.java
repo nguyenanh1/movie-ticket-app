@@ -2,6 +2,7 @@ package vn.anhnguyen.ticketmovie.presentation.presenter.impl;
 
 import vn.anhnguyen.ticketmovie.domain.excutor.impl.ThreadExecutor;
 import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterChangePassword;
+import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterHistoryTrans;
 import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterInformation;
 import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterLogin;
 import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterMain;
@@ -61,6 +62,10 @@ public class PresenterInjection {
 
     public IPresenterPay newPresenterPay(IPresenterPay.IViewPay view){
         return new PresenterPay(ThreadExecutor.getInstance(),MainThreadImpl.getInstance(),view);
+    }
+
+    public IPresenterHistoryTrans newPresenterHistoryTrans(IPresenterHistoryTrans.IViewHistoryTrans view){
+        return new PresnterHistoryTrans(ThreadExecutor.getInstance(),MainThreadImpl.getInstance(),view);
     }
 }
 

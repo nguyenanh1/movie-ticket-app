@@ -91,17 +91,6 @@ public class PayActivity extends BaseActivity implements IPresenterPay.IViewPay 
         setTitle(CommonUtil.getStringFromRes(R.string.pay,this));
         setRecyclerTicketRoom();
         initView();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(1000*300);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                mPresenter.unHolder(transMovie.getId());
-            }
-        }).start();
     }
 
     private void setRecyclerTicketRoom() {

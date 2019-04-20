@@ -45,12 +45,14 @@ public class LoginActivity extends BaseActivity implements IPresenterLogin.IView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        CommonUtil.setupUI(findViewById(R.id.layout_login), this);
         ButterKnife.bind(this);
         initToolbar();
         hideAvatar();
         showBack();
         hideMenuNavigation();
         setTitle(CommonUtil.getStringFromRes(R.string.login,this));
+
         initView();
     }
 

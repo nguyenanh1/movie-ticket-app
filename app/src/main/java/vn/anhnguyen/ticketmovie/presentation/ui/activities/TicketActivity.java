@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.TextView;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -19,12 +18,10 @@ import vn.anhnguyen.ticketmovie.R;
 import vn.anhnguyen.ticketmovie.domain.model.response.Movie;
 import vn.anhnguyen.ticketmovie.domain.model.response.MovieTime;
 import vn.anhnguyen.ticketmovie.domain.model.response.Room;
-import vn.anhnguyen.ticketmovie.domain.model.response.Ticket;
 import vn.anhnguyen.ticketmovie.domain.model.response.TicketDetail;
 import vn.anhnguyen.ticketmovie.domain.model.response.TransMovie;
 import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterTicket;
 import vn.anhnguyen.ticketmovie.presentation.presenter.impl.PresenterInjection;
-import vn.anhnguyen.ticketmovie.presentation.presenter.impl.PresenterTicket;
 import vn.anhnguyen.ticketmovie.presentation.ui.adapter.AdapterSeat;
 import vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomButton;
 import vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView;
@@ -83,7 +80,7 @@ public class TicketActivity extends BaseActivity implements IPresenterTicket.IVi
     private void setUpRecyclerSeat(int col) {
         mList = new ArrayList<>();
         mAdapterSeat = new AdapterSeat(this,mList);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,col,GridLayoutManager.HORIZONTAL,false);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,col,GridLayoutManager.VERTICAL,false);
         mRecyclerSeat.setLayoutManager(layoutManager);
         mRecyclerSeat.setAdapter(mAdapterSeat);
         mRecyclerSeat.setHasFixedSize(true);
@@ -110,6 +107,9 @@ public class TicketActivity extends BaseActivity implements IPresenterTicket.IVi
                 mPresenter.hold(mListId);
             }
         });
+        if(mListBook.size()!=0){
+            mListBook.clear();
+        }
     }
 
 
@@ -192,6 +192,7 @@ public class TicketActivity extends BaseActivity implements IPresenterTicket.IVi
     public void onClick(TicketDetail ticketDetail, int status) {
         if(status==1){
             mListBook.add(ticketDetail);
+            updateList();
         }
         if(status==0){
             deleteTicketdetail(ticketDetail);

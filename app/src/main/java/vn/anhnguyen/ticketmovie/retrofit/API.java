@@ -19,10 +19,11 @@ import vn.anhnguyen.ticketmovie.domain.model.response.ProfileResponse;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetDetaiLMovieTime;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetDetailMovie;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetInfoRoom;
+import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetListTran;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetMovie;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetMovieTime;
 import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetTicketHolder;
-import vn.anhnguyen.ticketmovie.domain.model.response.ResposneGetTransaction;
+import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetTransaction;
 
 public interface API {
     //Đăng ký
@@ -88,7 +89,7 @@ public interface API {
                                       @Query("idRoom")Integer idRoom);
 
     @PUT("/user/ticket/hold")
-    Call<ResposneGetTransaction> hold(@Header("token")String token,
+    Call<ResponseGetTransaction> hold(@Header("token")String token,
                                       @Body BodyTicketRequest bodyTicket);
 
     @PUT("/user/ticket/unhold")
@@ -102,4 +103,7 @@ public interface API {
     @GET("/user/ticket/getTicketBook")
     Call<ResponseGetTicketHolder> getTicketHolder(@Header("token")String token,
                                                   @Query("idTrans") int idTrans);
+
+    @GET("/user/ticket/history-transaction")
+    Call<ResponseGetListTran> getTransaction(@Header("token")String token);
 }

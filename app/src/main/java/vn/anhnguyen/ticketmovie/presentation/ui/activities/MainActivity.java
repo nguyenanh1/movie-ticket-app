@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.tmall.ultraviewpager.UltraViewPager;
 import com.tmall.ultraviewpager.transformer.UltraDepthScaleTransformer;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import butterknife.BindView;
@@ -140,7 +141,8 @@ public class MainActivity extends BaseActivity implements IPresenterMain.IViewMa
                     mTextType.setText("MEMBER");
                     break;
             }
-            mTextBalance.setText(SharePrefUtils.instance().getBalance()+"đ");
+            DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+            mTextBalance.setText(decimalFormat.format(SharePrefUtils.instance().getBalance())+"đ");
             mTextPoint.setText(SharePrefUtils.instance().getPoint()+"");
             mLayoutLogout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -203,7 +205,7 @@ public class MainActivity extends BaseActivity implements IPresenterMain.IViewMa
     }
 
     @SuppressLint("SetTextI18n")
-    private void setUpMovie(MovieCategory movie) {
+    private void setUpMovie(final MovieCategory movie) {
         if(movie.getMovie().getName().length()>35){
             String name = movie.getMovie().getName().substring(0,35);
             mTextName.setText(name+"...");
@@ -255,7 +257,13 @@ public class MainActivity extends BaseActivity implements IPresenterMain.IViewMa
         } else {
             mTextOld.setVisibility(View.GONE);
         }
-
+        mButtonBoooking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = MovieTimeActivity.getIntentExtra(MainActivity.this,movie.getMovie().getId(),movie.getMovie().getName());
+                startActivity(i);
+            }
+        });
 
     }
 

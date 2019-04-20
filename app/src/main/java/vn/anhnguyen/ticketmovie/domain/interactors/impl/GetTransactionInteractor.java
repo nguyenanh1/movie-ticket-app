@@ -5,47 +5,38 @@ import java.util.List;
 import vn.anhnguyen.ticketmovie.config.CommonVls;
 import vn.anhnguyen.ticketmovie.domain.excutor.Executor;
 import vn.anhnguyen.ticketmovie.domain.excutor.MainThread;
-import vn.anhnguyen.ticketmovie.domain.interactors.IHoldTicketInteractor;
+import vn.anhnguyen.ticketmovie.domain.interactors.IGetTransactionInteractor;
 import vn.anhnguyen.ticketmovie.domain.interactors.base.AbstractInteractor;
-import vn.anhnguyen.ticketmovie.domain.model.request.BodyTicketRequest;
-import vn.anhnguyen.ticketmovie.domain.model.response.BaseResponse;
-import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetDetailMovie;
-import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetTransaction;
+import vn.anhnguyen.ticketmovie.domain.model.response.ResponseGetListTran;
 import vn.anhnguyen.ticketmovie.domain.model.response.TransMovie;
-import vn.anhnguyen.ticketmovie.domain.model.response.User;
 import vn.anhnguyen.ticketmovie.domain.service.IAPIService;
 import vn.anhnguyen.ticketmovie.domain.service.IDeviceUtils;
 import vn.anhnguyen.ticketmovie.domain.service.ISharedPrefUtils;
 
-public class HoldTicketInteractor extends AbstractInteractor implements IHoldTicketInteractor {
-    private IHoldTicketInteractor.Callback mCallback;
+public class GetTransactionInteractor extends AbstractInteractor implements IGetTransactionInteractor {
+    private IGetTransactionInteractor.Callback mCallback;
     private IAPIService mAPIService;
     private IDeviceUtils mDeviceUtils;
     private ISharedPrefUtils mSharedPrefUtils;
-    private List<Integer> mList;
 
-    public HoldTicketInteractor(Executor threadExecutor, MainThread mainThread, Callback mCallback, IAPIService mAPIService, IDeviceUtils mDeviceUtils, ISharedPrefUtils mSharedPrefUtils, List<Integer> mList) {
+    public GetTransactionInteractor(Executor threadExecutor, MainThread mainThread, Callback mCallback, IAPIService mAPIService,
+                                    IDeviceUtils mDeviceUtils, ISharedPrefUtils mSharedPrefUtils) {
         super(threadExecutor, mainThread);
         this.mCallback = mCallback;
         this.mAPIService = mAPIService;
         this.mDeviceUtils = mDeviceUtils;
         this.mSharedPrefUtils = mSharedPrefUtils;
-        this.mList = mList;
     }
 
     @Override
     public void run() {
         if(mDeviceUtils.hasInternetConnection()) {
             String token = mSharedPrefUtils.getLoginStatusToken();
-            BodyTicketRequest request = new BodyTicketRequest(mList);
-            ResponseGetTransaction response = mAPIService.hold(token,request);
+            ResponseGetListTran response = mAPIService.getTransaction(token);
             if(response!=null){
                 switch (response.getCode()){
                     case CommonVls.SUCCESS:
                         notifySuccess(response.getData());
-                        break;
-                    case CommonVls.TICKET_IS_HOLDING:
-                        notifyHoldFail("Ghế này đã được đặt");
                         break;
                     case CommonVls.ARGUMENT_NOT_VALID:
                         notifyError("Bạn chưa nhập đầy đủ thông tin");
@@ -74,20 +65,11 @@ public class HoldTicketInteractor extends AbstractInteractor implements IHoldTic
         }
     }
 
-    private void notifySuccess(final TransMovie transMovie) {
+    private void notifySuccess(final List<TransMovie> transMovies) {
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.holdSucess(transMovie);
-            }
-        });
-    }
-
-    private void notifyHoldFail(final String message){
-        mMainThread.post(new Runnable() {
-            @Override
-            public void run() {
-                mCallback.holdFail(message);
+                mCallback.getTransactionSuccess(transMovies);
             }
         });
     }
