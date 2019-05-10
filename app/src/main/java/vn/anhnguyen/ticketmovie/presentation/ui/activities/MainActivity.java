@@ -9,6 +9,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -20,6 +22,7 @@ import com.tmall.ultraviewpager.UltraViewPager;
 import com.tmall.ultraviewpager.transformer.UltraDepthScaleTransformer;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -27,8 +30,10 @@ import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import vn.anhnguyen.ticketmovie.R;
 import vn.anhnguyen.ticketmovie.domain.model.response.MovieCategory;
+import vn.anhnguyen.ticketmovie.domain.model.response.NewsModel;
 import vn.anhnguyen.ticketmovie.presentation.presenter.IPresenterMain;
 import vn.anhnguyen.ticketmovie.presentation.presenter.impl.PresenterInjection;
+import vn.anhnguyen.ticketmovie.presentation.ui.adapter.AdapterNew;
 import vn.anhnguyen.ticketmovie.presentation.ui.adapter.MoviePagerAdapter;
 import vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomButton;
 import vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView;
@@ -36,7 +41,7 @@ import vn.anhnguyen.ticketmovie.util.SharePrefUtils;
 import vn.anhnguyen.ticketmovie.util.common.CommonUtil;
 
 public class MainActivity extends BaseActivity implements IPresenterMain.IViewMain,
-        RadioGroup.OnCheckedChangeListener,
+        RadioGroup.OnCheckedChangeListener, AdapterNew.INewEvent,
         MoviePagerAdapter.IEventClick {
     @BindView(R.id.drawer_layout_main)
     DrawerLayout mDrawerLayout;
@@ -83,8 +88,15 @@ public class MainActivity extends BaseActivity implements IPresenterMain.IViewMa
     @BindView(R.id.text_point)
     CustomTextView mTextPoint;
 
+    @BindView(R.id.rcl_new)
+    RecyclerView mRclNew;
+
     private final static int START = 0;
     private final static int LIMIT = 10;
+
+    private AdapterNew mAdpaterr;
+
+    private List<NewsModel> mListMews;
 
     private IPresenterMain mPresenter;
 
@@ -102,10 +114,22 @@ public class MainActivity extends BaseActivity implements IPresenterMain.IViewMa
         showMenuNavigation();
         setUpAvatar();
         setUpHome();
+        setUpRclNew();
         initView();
-
         mRadioShowing.setChecked(true);
         mPresenter.getMovieIsShowing(START, LIMIT);
+    }
+
+    private void setUpRclNew() {
+        mListMews = new ArrayList<>();
+        mListMews.add(new NewsModel(1,"https://www.cgv.vn/media/wysiwyg/2019/MAY19/thang-em-ly-tuong-350x495.jpg","Tặng STICKER phim \"thằng em lý tưởng\"","","AnhNguyenAndroid"));
+        mListMews.add(new NewsModel(2,"https://www.cgv.vn/media/banner/cache/1/b58515f018eb873dafa430b6f9ae0c1e/s/a/samsung_04_240x201.jpg","QUà tặng galaxy tặng vé xem phim 2d","","AnhNguyenAndroid"));
+        mListMews.add(new NewsModel(3,"https://www.cgv.vn/media/wysiwyg/2019/MAR19/350x495_2.jpg","Săn điểm khủng tại Venus","","AnhNguyenAndroid"));
+        mAdpaterr = new AdapterNew(mListMews,this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        mRclNew.setLayoutManager(layoutManager);
+        mRclNew.setAdapter(mAdpaterr);
+        mAdpaterr.notifyDataSetChanged();
     }
 
     @SuppressLint("SetTextI18n")

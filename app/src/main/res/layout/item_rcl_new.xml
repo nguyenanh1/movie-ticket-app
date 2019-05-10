@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="10"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:id="@+id/img_new"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="150dp" />
+        <vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView
+            android:id="@+id/text_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:textColor="@color/color_black"
+            android:layout_gravity="center"
+            android:textAllCaps="true"
+            android:textSize="18sp"
+            tools:text="TẶNG STICKER PHIM Thằng em lý tưởng"/>
+    </LinearLayout>
+    <View
+        android:background="@color/color_black"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+</LinearLayout>

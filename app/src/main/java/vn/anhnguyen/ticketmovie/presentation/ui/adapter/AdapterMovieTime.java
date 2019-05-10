@@ -62,7 +62,16 @@ public class AdapterMovieTime extends RecyclerView.Adapter<AdapterMovieTime.View
         void bindData(final MovieTime movieTime){
             int hh = movieTime.getTimeStart()/100;
             int mm= movieTime.getTimeStart()%100;
-            mTextTime.setText(hh+":"+mm);
+            String hhS = String.valueOf(hh);
+            String mmS = String.valueOf(mm);
+            if(hh<10){
+                hhS = "0"+hhS;
+            }
+            if(mm<10){
+                mmS = "0"+mmS;
+            }
+
+            mTextTime.setText(hhS+":"+mmS);
             mLayoutItemMovieTime.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

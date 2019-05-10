@@ -37,7 +37,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation 'de.hdodenhof:circleimageview:2.1.0'
-    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.android.support:multidex:1.0.0'
     implementation 'me.relex:circleindicator:1.2.2@aar'
     implementation 'com.android.support:animated-vector-drawable:28.0.0'
     implementation 'com.android.support:support-v4:28.0.0'
@@ -48,6 +48,7 @@ dependencies {
     implementation('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
         transitive = true
     }
+
     //SmartRefreshLayout
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-7'
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-7'

@@ -267,10 +267,9 @@ public class CommonUtil {
         return null;
     }
 
+    @SuppressLint("SimpleDateFormat")
     public String convertDateToYYYYmmDD(String dateInDDmmYYYY) {
-        @SuppressLint("SimpleDateFormat")
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        @SuppressLint("SimpleDateFormat")
         SimpleDateFormat convert = new SimpleDateFormat("yyyy-MM-dd");
         try {
             return convert.format(format.parse(dateInDDmmYYYY));

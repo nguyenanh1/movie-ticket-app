@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import vn.anhnguyen.ticketmovie.R;
+import vn.anhnguyen.ticketmovie.config.CommonVls;
 import vn.anhnguyen.ticketmovie.domain.model.response.MovieCategory;
 
 public class MoviePagerAdapter extends PagerAdapter {
@@ -40,7 +41,7 @@ public class MoviePagerAdapter extends PagerAdapter {
         View view = LayoutInflater.from(container.getContext()).inflate(R.layout.item_moviepager, container,false);
         ImageView imageView = view.findViewById(R.id.image_movie);
         final int id = mList.get(position).getMovie().getId();
-        final String url = mList.get(position).getMovie().getImageUrl();
+        final String url = CommonVls.URL+mList.get(position).getMovie().getImageUrl();
         Glide.with(container.getContext()).load(url).fitCenter().into(imageView);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
