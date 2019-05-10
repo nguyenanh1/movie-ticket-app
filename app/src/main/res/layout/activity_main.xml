@@ -6,206 +6,236 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".presentation.ui.activities.MainActivity">
+
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_layout_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <include layout="@layout/layout_toolbar"/>
+
+            <include layout="@layout/layout_toolbar" />
+
             <RadioGroup
                 android:id="@+id/radio_group_tab"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="3"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="3">
+
                 <RadioButton
                     android:id="@+id/radio_dang_chieu"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:paddingVertical="@dimen/dp_10"
                     android:layout_height="wrap_content"
-                    android:button="@null"
-                    android:textColor="@drawable/text_color_cate"
+                    android:layout_weight="1"
                     android:background="@drawable/background_tab_cate"
+                    android:button="@null"
                     android:gravity="center"
-                    android:text="@string/dang_chieu"/>
+                    android:paddingVertical="@dimen/dp_10"
+                    android:text="@string/dang_chieu"
+                    android:textColor="@drawable/text_color_cate" />
+
                 <RadioButton
                     android:id="@+id/radio_dac_biet"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_tab_cate"
                     android:button="@null"
                     android:gravity="center"
-                    android:background="@drawable/background_tab_cate"
-                    android:textColor="@drawable/text_color_cate"
                     android:paddingVertical="@dimen/dp_10"
-                    android:text="@string/dac_biet"/>
+                    android:text="@string/dac_biet"
+                    android:textColor="@drawable/text_color_cate" />
+
                 <RadioButton
                     android:id="@+id/radio_sap_chieu"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_tab_cate"
                     android:button="@null"
                     android:gravity="center"
-                    android:textColor="@drawable/text_color_cate"
                     android:paddingVertical="@dimen/dp_10"
-                    android:background="@drawable/background_tab_cate"
-                    android:text="@string/sap_chieu"/>
+                    android:text="@string/sap_chieu"
+                    android:textColor="@drawable/text_color_cate" />
             </RadioGroup>
-            <ScrollView
+
+            <android.support.v4.widget.NestedScrollView
                 android:id="@+id/scroll_home"
                 android:layout_width="match_parent"
+                android:scrollbars="vertical"
                 android:layout_height="match_parent">
+
                 <LinearLayout
-                    android:background="@color/color_bg"
+                    android:descendantFocusability="blocksDescendants"
                     android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@color/color_bg"
+                    android:orientation="vertical">
+
                     <LinearLayout
-                        android:background="#202020"
-                        android:orientation="vertical"
+                        android:descendantFocusability="blocksDescendants"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:background="#202020"
+                        android:orientation="vertical">
+
                         <com.tmall.ultraviewpager.UltraViewPager
-                            android:layout_marginTop="@dimen/dp_10"
                             android:id="@+id/view_pager_movie"
                             android:layout_width="match_parent"
-                            android:layout_height="400dp">
-                        </com.tmall.ultraviewpager.UltraViewPager>
+                            android:layout_height="400dp"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:focusable="true"></com.tmall.ultraviewpager.UltraViewPager>
+
                         <LinearLayout
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="@dimen/dp_10">
+
                             <LinearLayout
+                                android:layout_weight="1"
                                 android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dp_5"
                                 android:layout_marginTop="@dimen/dp_10"
                                 android:layout_marginBottom="@dimen/dp_10"
-                                android:orientation="vertical"
-                                android:layout_marginLeft="@dimen/dp_5"
-                                android:layout_height="wrap_content">
+                                android:orientation="vertical">
+
                                 <LinearLayout
-                                    android:gravity="center"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content">
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center">
+
                                     <vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView
-                                        tools:text="Cua lại vợ bầu"
                                         android:id="@+id/text_name"
-                                        android:textSize="@dimen/text_size_16sp"
-                                        android:textColor="@color/color_white"
                                         android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/color_white"
+                                        android:textSize="@dimen/text_size_16sp"
+                                        tools:text="Cua lại vợ bầu" />
+
                                     <vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView
                                         android:id="@+id/text_old"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/dp_5"
+                                        android:background="@drawable/drawable_c_red"
+                                        android:paddingHorizontal="@dimen/dp_5"
+                                        android:textColor="#F51414"
                                         android:textSize="@dimen/text_size_8sp"
                                         android:textStyle="bold"
-                                        android:paddingHorizontal="@dimen/dp_5"
-                                        android:layout_marginLeft="@dimen/dp_5"
-                                        android:textColor="#F51414"
-                                        android:background="@drawable/drawable_c_red"
-                                        tools:text="C18"/>
+                                        tools:text="C18" />
                                 </LinearLayout>
 
                                 <LinearLayout
-                                    android:layout_marginTop="@dimen/dp_5"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content">
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_5">
+
                                     <vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView
                                         android:id="@+id/text_duration"
                                         android:layout_width="wrap_content"
-                                        android:textColor="#625d57"
-                                        tools:text="1 Giờ 21 phút"
+                                        android:layout_height="wrap_content"
                                         android:layout_marginRight="@dimen/dp_5"
-                                        android:layout_height="wrap_content" />
+                                        android:textColor="#625d57"
+                                        tools:text="1 Giờ 21 phút" />
+
                                     <vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView
                                         android:id="@+id/text_time"
                                         android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
                                         android:textColor="#625d57"
-                                        tools:text="05 th4 2019"
-                                        android:layout_height="wrap_content" />
+                                        tools:text="05 th4 2019" />
                                 </LinearLayout>
 
                             </LinearLayout>
+
                             <LinearLayout
-                                android:layout_width="match_parent"
-                                android:gravity="right|center"
-                                android:layout_height="match_parent">
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="right|center">
 
                                 <vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomButton
-                                    android:visibility="gone"
-                                    android:textAllCaps="false"
                                     android:id="@+id/button_booking"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="40dp"
-                                    android:text="@string/dat_ve"
+                                    android:layout_width="80dp"
+                                    android:layout_height="30dp"
                                     android:background="@drawable/background_button_booking"
-                                    android:textColor="@color/color_white" />
+                                    android:text="@string/dat_ve"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/color_white"
+                                    android:visibility="gone" />
                             </LinearLayout>
 
                         </LinearLayout>
                     </LinearLayout>
+
                     <RelativeLayout
+                        android:descendantFocusability="blocksDescendants"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_10"
-                        android:background="@color/color_white">
+                        android:background="@color/color_white"
+                        android:padding="@dimen/dp_10">
+
                         <vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Tìm rạp gần bạn"
-                            android:textColor="@color/color_text_hint"
-                            />
+                            android:textColor="@color/color_text_hint" />
                     </RelativeLayout>
-                    
+
                     <LinearLayout
+                        android:descendantFocusability="blocksDescendants"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
                         android:background="@color/color_white"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:orientation="vertical">
+
                         <RelativeLayout
-                            android:padding="@dimen/dp_10"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dp_10">
+
                             <vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/tin_nong"
-                                android:textStyle="bold"
-                                android:textColor="@color/color_black"/>
+                                android:textColor="@color/color_black"
+                                android:textStyle="bold" />
+
                             <vn.anhnguyen.ticketmovie.presentation.ui.custom.CustomTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
                                 android:layout_centerVertical="true"
-                                android:paddingHorizontal="@dimen/dp_20"
                                 android:background="@drawable/background_see_all"
-                                android:text="@string/tat_ca"
-                                android:layout_alignParentRight="true" />
+                                android:paddingHorizontal="@dimen/dp_20"
+                                android:text="@string/tat_ca" />
                         </RelativeLayout>
+
                         <android.support.v7.widget.RecyclerView
-                            android:layout_marginVertical="@dimen/dp_5"
                             android:id="@+id/rcl_new"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                        </android.support.v7.widget.RecyclerView>
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/dp_5"
+                            android:focusable="false"></android.support.v7.widget.RecyclerView>
                     </LinearLayout>
                 </LinearLayout>
-
-            </ScrollView>
+            </android.support.v4.widget.NestedScrollView>
         </LinearLayout>
+
         <android.support.design.widget.NavigationView
             android:id="@+id/navigation_menu"
-            android:layout_gravity="end"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <include layout="@layout/layout_menu"/>
+            android:layout_height="match_parent"
+            android:layout_gravity="end">
+
+            <include layout="@layout/layout_menu" />
         </android.support.design.widget.NavigationView>
     </android.support.v4.widget.DrawerLayout>
 

@@ -6,8 +6,8 @@ import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
 
 public class CommonVls {
-    public static final String URL = "http://192.168.100.18/";
-    public static final String BASE_URL = "http://192.168.100.18:9085/";
+    public static final String URL = "http://192.168.100.101/";
+    public static final String BASE_URL = "http://192.168.100.101:9085/";
    // public static final String BASE_URL = "http://192.168.100.101:9085/";
     //Lý do đến LoginActivity
     public static final String REASON_FOR_LOGIN = "reason for login";

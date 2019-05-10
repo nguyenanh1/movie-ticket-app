@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -88,6 +89,9 @@ public class MainActivity extends BaseActivity implements IPresenterMain.IViewMa
     @BindView(R.id.text_point)
     CustomTextView mTextPoint;
 
+    @BindView(R.id.scroll_home)
+    NestedScrollView mScroll;
+
     @BindView(R.id.rcl_new)
     RecyclerView mRclNew;
 
@@ -118,6 +122,7 @@ public class MainActivity extends BaseActivity implements IPresenterMain.IViewMa
         initView();
         mRadioShowing.setChecked(true);
         mPresenter.getMovieIsShowing(START, LIMIT);
+        mScroll.scrollTo(0,0);
     }
 
     private void setUpRclNew() {
@@ -129,7 +134,6 @@ public class MainActivity extends BaseActivity implements IPresenterMain.IViewMa
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         mRclNew.setLayoutManager(layoutManager);
         mRclNew.setAdapter(mAdpaterr);
-        mAdpaterr.notifyDataSetChanged();
     }
 
     @SuppressLint("SetTextI18n")
